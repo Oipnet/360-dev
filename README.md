@@ -50,3 +50,8 @@ $ php artisan serve
 Vous pouvez accéder à l'application à l'adresse suivant : http://localhost:8000/
 
 Diagramme UML du projet : http://www.laravelsd.com/share/smezUK (pas encore définitif)
+
+## Contribuer
+
+Pour contribuer il faut respecter les normes de commit et de convensions de codage décris dans le 
+CONTRIBUTING.md.
