@@ -29,6 +29,18 @@ DB_PASSWORD=
 
 ```
 
+Mettre à jour sa base de données : 
+
+```bash
+$ php artisan migrate
+```
+
+Installer et compiler les assets : 
+
+```bash
+$ npm i && npm run dev
+```
+
 Démarrer le serveur local
 
 ```bash
@@ -36,3 +48,5 @@ $ php artisan serve
 ```
 
 Vous pouvez accéder à l'application à l'adresse suivant : http://localhost:8000/
+
+Diagramme UML du projet : http://www.laravelsd.com/share/smezUK (pas encore définitif)
