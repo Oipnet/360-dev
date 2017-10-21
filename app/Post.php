@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
  */
 class Post extends Model
 {
+    use PostRepository;
     /**
      * @return BelongsTo
      */
@@ -35,19 +37,5 @@ class Post extends Model
     public function shortContent(): string
     {
         return Str::limit($this->content);
-    }
-
-    /**
-     * Recover only online articles and pages.
-     *
-     * @param int $numberpage The number of articles per page.
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public static function paginatePosts(int $numberpage = 15)
-    {
-        return self::with('category')
-            ->with('user')
-            ->where('online', true)
-            ->paginate($numberpage);
     }
 }
