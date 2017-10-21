@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<ruleset name="360-dev">
+    <description>Conventions de codage pour le projet 360 dev</description>
+
+    <arg name="colors"/>
+    <arg value="p"/>
+
+    <file>app</file>
+
+    <rule ref="PSR2"></rule>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"></rule>
+</ruleset>
