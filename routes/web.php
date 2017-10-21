@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
+    // TODO Create home controller
     return view('welcome');
 });
+
+Route::get('/blog', 'PostsController@index')->name('posts.index');
