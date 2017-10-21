@@ -38,7 +38,7 @@ $ php artisan migrate
 Préremplir sa base de données :
 
 ```bash
-$ php artisan db:seed
+$ php artisan db:seed ou php artisan migrate:refresh --seed
 ```
 
 Installer et compiler les assets : 

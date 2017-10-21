@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use Illuminate\View\View;
 
 /**
@@ -15,6 +17,18 @@ class PostsController extends Controller
      */
     public function index(): View
     {
-        return view('posts.index');
+        $posts      = Post::paginatePosts();
+        $categories = Category::all();
+        return view('posts.index', compact('posts', 'categories'));
+    }
+
+    /**
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|View
+     */
+    public function view(string $slug): View
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.view', compact('post'));
     }
 }
