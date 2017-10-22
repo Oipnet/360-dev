@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function renderIndex(string $model, string $with = null)
+    protected function renderIndex(string $model, string $with = null)
     {
         $db = "\\App\\Model\\" . ucfirst($model);
         if (!is_null($with)) {
@@ -24,7 +24,7 @@ class Controller extends BaseController
         return view(strtolower($model) . '.index', compact('items', 'categories'));
     }
 
-    public function renderShow(string $model, string $slug)
+    protected function renderShow(string $model, string $slug)
     {
         $db = "\\App\\Model\\" . ucfirst($model);
         $item = $db::where('slug', $slug)->first();
