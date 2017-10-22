@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
@@ -9,10 +9,18 @@ use Illuminate\Support\Str;
 
 /**
  * Class Post
+ * @property \Carbon\Carbon $created_at
+ * @property int            $id
+ * @property \Carbon\Carbon $updated_at
+ * @property mixed          $category
+ * @property mixed          content
+ * @property mixed          $user
  */
 class Post extends Model
 {
     use PostRepository;
+
+    protected $guarded = [];
 
     /**
      * @return BelongsTo
