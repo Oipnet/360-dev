@@ -16,7 +16,4 @@ Route::get('/', function () {
     return view('welcome');
 })->name('root');
 
-Route::get('/blog', 'PostsController@index')->name('posts.index');
-Route::get('/blog/{slug}', 'PostsController@view')
-    ->name('posts.view')
-    ->where(['slug' => '^[a-z0-9]+(?:-[a-z0-9]+)*$']);
+Route::resource('blog', 'PostsController');

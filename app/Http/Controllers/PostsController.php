@@ -26,7 +26,7 @@ class PostsController extends Controller
      * @param string $slug
      * @return \Illuminate\Contracts\View\Factory|View
      */
-    public function view(string $slug): View
+    public function show(string $slug): View
     {
         $post = Post::where('slug', $slug)->firstOrFail();
         return view('posts.view', compact('post'));

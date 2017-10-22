@@ -13,7 +13,7 @@
                             <div class="card-body text-center">
                                 <div class="card-title">{{ $post->name }}</div>
                                 <p class="card-text">{{ $post->shortContent() }}</p>
-                                <a href="{{ route('posts.view', ['slug' => $post->slug]) }}" class="btn btn-outline-primary m-b">
+                                <a href="{{ route('blog.show', ['slug' => $post->slug]) }}" class="btn btn-outline-primary m-b">
                                     Lire la suite <i class="glyphicon glyphicon-menu-right"></i>
                                 </a>
                             </div>

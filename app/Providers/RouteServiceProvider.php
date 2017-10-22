@@ -23,7 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Sets the rules for slug.
+        Route::pattern('slug', '^[a-z0-9]+(?:-[a-z0-9]+)*$');
 
         parent::boot();
     }
