@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Category;
 use Faker\Generator as Faker;
 
 /*
@@ -13,10 +14,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Model\Category::class, function (Faker $faker) {
+$factory->define(Category::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
         'slug' => $faker->unique()->slug,
+        'image' => $faker->imageUrl(),
+        'type' => rand(0,1) ? 'post' : 'tuto'
     ];
 });

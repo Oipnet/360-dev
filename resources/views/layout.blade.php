@@ -9,7 +9,7 @@
 
     <title>360 dev</title>
 
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>

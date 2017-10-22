@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
@@ -15,10 +14,10 @@ use Illuminate\Support\Str;
  * @property mixed          $category
  * @property mixed          content
  * @property mixed          $user
+ * @property mixed          $login
  */
 class Post extends Model
 {
-    use PostRepository;
 
     protected $guarded = [];
 

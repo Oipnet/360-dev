@@ -20,6 +20,8 @@ class CreateTutosTable extends Migration
             $table->string('type');
             $table->string('slug')->unique();
             $table->string('image');
+            $table->integer('user_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
 

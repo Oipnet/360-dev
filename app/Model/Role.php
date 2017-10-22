@@ -16,6 +16,8 @@ class Role extends Model
 
     protected $guarded = [];
 
+    public $timestamps = false;
+
     /**
      * @return BelongsTo
      */

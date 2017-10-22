@@ -17,8 +17,16 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
+            $table->string('type')->default('post');
             $table->timestamps();
         });
+
+        Schema::create('category_post', function (Blueprint $table) {
+           $table->integer('category_id')->unsigned();
+           $table->integer('post_id')->unsigned();
+        });
+
     }
 
     /**

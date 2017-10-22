@@ -9,6 +9,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('tuto.index') }}" class="nav-link">Tuto</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('category.index') }}" class="nav-link">Category</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

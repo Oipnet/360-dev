@@ -4,27 +4,29 @@
 
     <div class="row">
         <div class="col-12 col-md-9">
-            <h1>Blog</h1>
+            <h1>Tuto</h1>
             <div class="row">
-                @foreach($posts as $post)
+                @foreach($items as $item)
                     <div class="col-md-4 mb-3">
                         <div class="card card-default">
-                            <img src="{{ $post->image }}" alt="" class="card-img-top" height="175">
+                            <img src="{{ $item->image }}" alt="" class="card-img-top" height="175">
                             <div class="card-body text-center">
-                                <div class="card-title">{{ $post->name }}</div>
-                                <p class="card-text">{{ $post->shortContent() }}</p>
-                                <a href="{{ route('blog.show', ['slug' => $post->slug]) }}" class="btn btn-outline-primary m-b">
+                                <div class="card-title">{{ $item->name }}</div>
+                                <p class="card-text">{{ str_limit($item->content, 100, '...') }}</p>
+                                <a href="{{ route('tuto.show', ['slug' => $item->slug]) }}" class="btn btn-outline-primary m-b">
                                     Lire la suite <i class="glyphicon glyphicon-menu-right"></i>
                                 </a>
                             </div>
                             <div class="card-footer">
-                                <small>{{ $post->created_at->diffForhumans() }}/ {{ $post->user->name }}</small>
+                                <small>{{ $item->created_at }} // By {{ $item->user->login }}</small>
                             </div>
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="row">
                 <nav aria-label="Page navigation example">
-                    {{ $posts->links() }}
+                    {{ $items->links() }}
                 </nav>
             </div>
         </div>

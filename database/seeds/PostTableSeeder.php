@@ -1,11 +1,12 @@
 <?php
 
+use App\Model\Post;
 use Illuminate\Database\Seeder;
 
 /**
  * Class PostsTableSeeder
  */
-class PostsTableSeeder extends Seeder
+class PostTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +15,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Model\Post::class, 50)->create();
+        factory(Post::class, 50)->create();
     }
 }

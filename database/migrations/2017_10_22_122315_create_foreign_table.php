@@ -31,6 +31,17 @@ class CreateForeignTable extends Migration
                 ->onDelete('cascade');
         });
 
+        Schema::table('tutos', function (Blueprint $table) {
+           $table->foreign('user_id')
+               ->references('id')
+               ->on('users')
+               ->onDelete('cascade');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+        });
+
         Schema::table('post_user', function (Blueprint $table) {
             $table->foreign('post_id')
                 ->references('id')
@@ -50,6 +61,18 @@ class CreateForeignTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+        });
+
+        Schema::table('category_post', function (Blueprint $table) {
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            $table->foreign('post_id')
+                ->references('id')
+                ->on('posts')
                 ->onDelete('cascade');
 
         });
@@ -83,6 +106,11 @@ class CreateForeignTable extends Migration
             $table->dropIfExists('role_id');
         });
 
+        Schema::table('tutos', function (Blueprint $table) {
+            $table->dropIfExists('user_id');
+            $table->dropIfExists('category_id');
+        });
+
         Schema::table('post_user', function (Blueprint $table) {
             $table->dropIfExists('post_id');
             $table->dropIfExists('user_id');
@@ -91,6 +119,11 @@ class CreateForeignTable extends Migration
         Schema::table('tuto_user', function (Blueprint $table) {
             $table->dropIfExists('tuto_id');
             $table->dropIfExists('user_id');
+        });
+
+        Schema::table('category_post', function (Blueprint $table) {
+            $table->dropIfExists('category_id');
+            $table->dropIfExists('psot_id');
         });
 
         Schema::table('category_tuto', function (Blueprint $table) {

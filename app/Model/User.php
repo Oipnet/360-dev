@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int            $id
  * @property \Carbon\Carbon $updated_at
  * @property mixed          $role
+ * @property mixed          $tutos
  */
 class User extends Authenticatable
 {
@@ -42,6 +43,14 @@ class User extends Authenticatable
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function tutos(): BelongsToMany
+    {
+        return $this->belongsToMany(Tuto::class);
     }
 
     /**
