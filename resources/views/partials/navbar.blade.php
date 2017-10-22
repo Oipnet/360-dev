@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
+                <a class="nav-link {{ Menu::isActive('Posts') }}" href="{{ route('blog.index') }}">Blog</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

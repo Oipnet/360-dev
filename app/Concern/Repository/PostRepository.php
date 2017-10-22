@@ -12,14 +12,11 @@ trait PostRepository
     /**
      * Recover only online articles and pages.
      *
-     * @param int $numberpage The number of articles per page.
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return mixed
      */
-    public static function paginatePosts(int $numberpage = 15)
+    public static function onlinePosts()
     {
-        return self::with('category')
-            ->with('user')
-            ->where('online', true)
-            ->paginate($numberpage);
+        return self::with('category', 'user')
+            ->where('online', true);
     }
 }

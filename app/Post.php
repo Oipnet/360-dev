@@ -39,4 +39,12 @@ class Post extends Model
     {
         return Str::limit($this->content);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at->diffForHumans();
+    }
 }

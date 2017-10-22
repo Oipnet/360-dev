@@ -17,3 +17,4 @@ Route::get('/', function () {
 })->name('root');
 
 Route::resource('blog', 'PostsController');
+Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');
