@@ -35,6 +35,12 @@ Mettre à jour sa base de données :
 $ php artisan migrate
 ```
 
+Préremplir sa base de données :
+
+```bash
+$ php artisan db:seed ou php artisan migrate:refresh --seed
+```
+
 Installer et compiler les assets : 
 
 ```bash

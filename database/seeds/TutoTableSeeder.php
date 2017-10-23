@@ -1,8 +1,9 @@
 <?php
 
+use App\Model\Tuto;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class TutoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PostTableSeeder::class);
-        $this->call(TutoTableSeeder::class);
+        factory(Tuto::class, 50)->create();
     }
 }

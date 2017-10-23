@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Barryvdh\Debugbar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fix bug "Specified key was too long error"
         Schema::defaultStringLength(191);
+        if (env('APP_DEBUG')) {
+            $this->register(Debugbar\ServiceProvider::class);
+        }
     }
 
     /**

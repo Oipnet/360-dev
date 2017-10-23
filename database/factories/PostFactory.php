@@ -1,6 +1,7 @@
 <?php
 
-use App\Model\Role;
+use App\Model\Category;
+use App\Model\Post;
 use App\Model\User;
 use Faker\Generator as Faker;
 
@@ -15,16 +16,18 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
-    static $password;
+$factory->define(Post::class, function (Faker $faker) {
 
     return [
-        'login'           => $faker->name,
-        'email'          => $faker->unique()->safeEmail,
-        'password'       => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-        'role_id'        => function() {
-            return factory(Role::class)->create()->id;
+        'name'    => $faker->name,
+        'slug'    => $faker->unique()->slug,
+        'content' => $faker->text(1000),
+        'image'   => $faker->imageUrl(),
+        'category_id' => function () {
+            return factory(Category::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(User::class)->create()->id;
         }
     ];
 });
