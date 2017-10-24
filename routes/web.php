@@ -19,5 +19,5 @@ Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.cate
 // Admin Dashboard
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', 'Admin\DashboardController@index');
-    Route::resource('posts', 'Admin\PostsController@index');
+    Route::resource('posts', 'Admin\PostsController');
 });
