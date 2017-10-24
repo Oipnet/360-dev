@@ -13,13 +13,18 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
-    static $password;
+$factory->define(App\Post::class, function (Faker $faker) {
 
     return [
-        'name'           => $faker->name,
-        'email'          => $faker->unique()->safeEmail,
-        'password'       => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'name'    => $faker->name,
+        'slug'    => $faker->slug,
+        'content' => $faker->text(1000),
+        'image'   => $faker->imageUrl(),
+        'category_id' => function () {
+            return factory(\App\Category::class)->create()->id;
+        },
+        'user_id' => function () {
+            return factory(\App\User::class)->create()->id;
+        }
     ];
 });

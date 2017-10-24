@@ -14,6 +14,7 @@
 Route::get('/', function () {
     // TODO Create home controller
     return view('welcome');
-});
+})->name('root');
 
-Route::get('/blog', 'PostsController@index')->name('posts.index');
+Route::resource('blog', 'PostsController');
+Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');

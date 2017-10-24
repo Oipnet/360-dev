@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->string('image');
             $table->timestamps();
         });
 
@@ -26,7 +25,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->longText('content');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')
@@ -52,8 +51,8 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
         Schema::dropIfExists('posts');
+        Schema::dropIfExists('categories');
         Schema::dropIfExists('roles');
     }
 }
