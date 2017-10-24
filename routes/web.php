@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    // TODO Create home controller
-    return view('welcome');
-})->name('root');
+Route::get('/', 'HomeController@index')->name('root');
 
 Route::resource('blog', 'PostsController');
 Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');
+
+// Admin Dashboard
+Route::prefix('admin')->group(function () {
+    Route::get('dashboard', 'Admin\DashboardController@index');
+    Route::resource('posts', 'Admin\PostsController@index');
+});
