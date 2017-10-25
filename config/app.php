@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
         \App\Providers\ObserverServiceProvider::class,
 
     ],
@@ -228,7 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Project aliases
-        'Menu' => \App\Helpers\MenuHelper::class
+        'Menu'       => \App\Helpers\MenuHelper::class,
+        'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class
     ],
 
 ];
