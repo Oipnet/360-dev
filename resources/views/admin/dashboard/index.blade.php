@@ -7,15 +7,15 @@
             <div style="padding: 35px;" align="center" class="card">
                 <div class="row">
                     <div class="left card-title">
-                        <b>User Management</b>
+                        <b>Gérer les articles</b>
                     </div>
                 </div>
 
                 <div class="row">
-                    <a href="#!">
+                    <a href="{{ route('posts.index') }}">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                             <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989968/seller_rcnkab.png" class="responsive-img" /><br>
-                            <span class="indigo-text text-lighten-1"><h5>Seller</h5></span>
+                            <span class="indigo-text text-lighten-1"><h5>Articles</h5></span>
                         </div>
                     </a>
                     <div class="col s1">&nbsp;</div>
@@ -24,7 +24,7 @@
                     <a href="#!">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                             <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989969/people_2_knqa3y.png" class="responsive-img" /><br>
-                            <span class="indigo-text text-lighten-1"><h5>Customer</h5></span>
+                            <span class="indigo-text text-lighten-1"><h5>Catégories</h5></span>
                         </div>
                     </a>
                 </div>

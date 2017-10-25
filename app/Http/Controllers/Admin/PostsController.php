@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Forms\PostsForm;
 use App\Http\Controllers\Controller;
+use App\Post;
 use Illuminate\Contracts\View\View;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class PostsController extends Controller
 {
@@ -12,7 +15,16 @@ class PostsController extends Controller
      */
     public function index(): View
     {
-        return view('admin.posts.index');
+        $posts = Post::all();
+        return view('admin.posts.index', compact('posts'));
     }
 
+    public function create(FormBuilder $formBuilder)
+    {
+        $form = $formBuilder->create(PostsForm::class, [
+            'method' => 'POST',
+            'url'    => route('posts.store')
+        ]);
+        return view('admin.posts.create', compact('form'));
+    }
 }

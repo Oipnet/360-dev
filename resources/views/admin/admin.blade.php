@@ -65,19 +65,19 @@
         </div>
     </li>
 
-    <li id="dash_dashboard"><a class="waves-effect" href="#!"><b>Dashboard</b></a></li>
+    <li id="dash_dashboard"><a class="waves-effect" href="{{ route('admin.index') }}"><b>Dashboard</b></a></li>
 
     <ul class="collapsible" data-collapsible="accordion">
         <li id="dash_users">
-            <div id="dash_users_header" class="collapsible-header waves-effect"><b>Users</b></div>
+            <div id="dash_users_header" class="collapsible-header waves-effect"><b>Blog</b></div>
             <div id="dash_users_body" class="collapsible-body">
                 <ul>
                     <li id="users_seller">
-                        <a class="waves-effect" style="text-decoration: none;" href="#!">Seller</a>
+                        <a class="waves-effect" style="text-decoration: none;" href="{{ route('posts.index') }}">Articles</a>
                     </li>
 
                     <li id="users_customer">
-                        <a class="waves-effect" style="text-decoration: none;" href="#!">Customer</a>
+                        <a class="waves-effect" style="text-decoration: none;" href="#!">Catégories</a>
                     </li>
                 </ul>
             </div>
