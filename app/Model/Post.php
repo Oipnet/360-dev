@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 
 /**
  * Class Post
+ * @property mixed created_at
+ * @property mixed content
+ * @property mixed $category
+ * @property mixed $user
  */
 class Post extends Model
 {

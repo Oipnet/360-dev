@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
 
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -228,7 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Project aliases
-        'Menu' => \App\Helpers\MenuHelper::class
+        'Menu' => \App\Helpers\MenuHelper::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class
     ],
 
 ];

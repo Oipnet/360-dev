@@ -18,3 +18,8 @@ Route::get('/', function () {
 
 Route::resource('blog', 'PostsController');
 Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');
+
+// Authentication
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

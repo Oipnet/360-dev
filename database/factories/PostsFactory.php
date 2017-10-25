@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Model\Post::class, function (Faker $faker) {
 
     return [
         'name'    => $faker->name,
@@ -21,10 +21,10 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'content' => $faker->text(1000),
         'image'   => $faker->imageUrl(),
         'category_id' => function () {
-            return factory(\App\Category::class)->create()->id;
+            return factory(\App\Model\Category::class)->create()->id;
         },
         'user_id' => function () {
-            return factory(\App\User::class)->create()->id;
+            return factory(\App\Model\User::class)->create()->id;
         }
     ];
 });

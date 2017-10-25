@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Post;
+use App\Model\Category;
+use App\Model\Post;
 use Illuminate\View\View;
 
 /**

@@ -37,11 +37,6 @@ class CreatePostsTable extends Migration
             $table->index(['category_id', 'user_id']);
             $table->timestamps();
         });
-
-        Schema::create('roles', function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-        });
     }
 
     /**
@@ -53,6 +48,5 @@ class CreatePostsTable extends Migration
     {
         Schema::dropIfExists('posts');
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('roles');
     }
 }
