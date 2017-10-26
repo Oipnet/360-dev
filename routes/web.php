@@ -21,5 +21,6 @@ Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.cate
 
 // Authentication
 Auth::routes();
+Route::get('/verify/{id}/{token}', 'Auth/RegisterController@confirm')->name('auth.confirm');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -19,9 +19,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Zizaco\Entrust\Middleware\{
-    EntrustAbility, EntrustPermission, EntrustRole
-};
+use Zizaco\Entrust\Middleware\EntrustAbility;
+use Zizaco\Entrust\Middleware\EntrustPermission;
+use Zizaco\Entrust\Middleware\EntrustRole;
 
 class Kernel extends HttpKernel
 {

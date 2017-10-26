@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Model\User;
 use App\Http\Controllers\Controller;
+use App\Notifications\RegisteredUser;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -32,11 +36,44 @@ class RegisterController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        $user->notify(new RegisteredUser());
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * Verify the email adress with token
+     *
+     * @param int    $id
+     * @param string $token
+     * @return Redirector
+     */
+    public function confirm(int $id, string $token)
+    {
+        $user = User::where([['id', $id], ['verify_token', $token]])->first();
+        if ($user) {
+            $user->update(['veriffy_token' => null]);
+            $this->guard()->login($user);
+            return redirect($this->redirectPath());
+        } else {
+            return redirect('/login')->with('error', 'Ce lien n\'est pas valide');
+        }
     }
 
     /**
