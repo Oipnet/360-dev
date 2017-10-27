@@ -20,4 +20,5 @@ Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.cate
 Route::prefix('admin')->group(function () {
     Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
     Route::resource('posts', 'Admin\PostsController');
+    Route::resource('categories', 'Admin\CategoriesController');
 });

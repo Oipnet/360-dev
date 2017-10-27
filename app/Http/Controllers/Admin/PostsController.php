@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Concern\HasRedirect;
 use App\Forms\PostsForm;
 use App\Http\Controllers\Controller;
 use App\Http\Tools\Method;
@@ -17,6 +18,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
  */
 class PostsController extends Controller
 {
+    use HasRedirect;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|View
@@ -71,7 +73,10 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $form = $this->getForm(
-            $formBuilder, route('posts.update', $post), Method::PUT, $post
+            $formBuilder,
+            route('posts.update', $post),
+            Method::PUT,
+            $post
         );
         return view('admin.posts.edit', compact('post', 'form'));
     }
@@ -87,18 +92,6 @@ class PostsController extends Controller
             return $this->redirectWithMessage($request, 'posts.index', "L'article a bien été édité");
         }
         return redirect()->back();
-    }
-
-    /**
-     * @param Request $request
-     * @param string $routeName
-     * @param string $message
-     * @return RedirectResponse
-     */
-    private function redirectWithMessage(Request $request, string $routeName, string $message): RedirectResponse
-    {
-        $request->session()->flash('success', $message);
-        return redirect()->route($routeName);
     }
 
     /**

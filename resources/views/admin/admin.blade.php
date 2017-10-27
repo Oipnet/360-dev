@@ -77,7 +77,7 @@
                     </li>
 
                     <li id="users_customer">
-                        <a class="waves-effect" style="text-decoration: none;" href="#!">Catégories</a>
+                        <a class="waves-effect" style="text-decoration: none;" href="{{ route('categories.index') }}">Catégories</a>
                     </li>
                 </ul>
             </div>
