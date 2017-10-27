@@ -12,6 +12,7 @@
                     <th>ID</th>
                     <th>Titre</th>
                     <th>URL</th>
+                    <th>En ligne ?</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -20,15 +21,18 @@
                 @foreach($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
-                        <td><a href="">{{ $post->name }}</a></td>
+                        <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}">{{ $post->name }}</a></td>
                         <td>{{ $post->slug }}</td>
+                        <td>{{ $post->online }}</td>
                         <td>
-                            <a href="" class="btn waves-effect waves-light">
-                                Editer <i class="material-icons">mode_edit</i>
+                            <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn waves-effect waves-light">
+                                <i class="material-icons">mode_edit</i> Editer
                             </a>
-                            <a href="" class="btn waves-effect red">
-                                Supprimer
-                            </a>
+                            <form action="{{ route('posts.destroy', $post) }}" method="post" class="delete-inline" style="display: inline-block;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {{ csrf_field() }}
+                                <button class="btn waves-effect red inline"><i class="material-icons">delete</i> Supprimer</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

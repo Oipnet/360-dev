@@ -13,6 +13,12 @@ return [
             'wrapper_class' => 'input-field',
             'field_class'   => 'materialize-textarea'
         ],
+        'input'               => [
+            'wrapper_class' => 'input-field'
+        ],
+        'submit'              => [
+            'wrapper_class' => 'input-field'
+        ]
 
         // Override a class from a field.
         //'text'                => [

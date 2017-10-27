@@ -14,6 +14,8 @@ class Post extends Model
 {
     use PostRepository;
 
+    protected $fillable = ['name', 'slug', 'image', 'content', 'category_id', 'user_id', 'online'];
+
     /**
      * @return BelongsTo
      */
@@ -46,5 +48,24 @@ class Post extends Model
     public function getCreatedAt()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    /**
+     * @param null|string $slug
+     */
+    public function setSlugAttribute(?string $slug): void
+    {
+        if ($this->name && !$slug) {
+            $this->attributes['slug'] = Str::slug($this->name);
+        }
+    }
+
+    /**
+     * @param $online bool
+     * @return string
+     */
+    public function getOnlineAttribute(bool $online): string
+    {
+        return $online ? 'Oui' : 'Non';
     }
 }
