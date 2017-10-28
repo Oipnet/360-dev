@@ -41,8 +41,14 @@ class RegisteredUser extends Notification
         return (new MailMessage)
             ->success()
             ->subject('Inscription sur ' . env('APP_NAME'))
-            ->line('Votre compte à bien été créé, merci de confirmer votre adresse mail en cliquant sur le bouton suivant')
-            ->action('Confirmer mon adresse mail', route('auth.confirm', [$notifiable->id, urlencode($notifiable->verify_token)]))
+            ->line(
+                'Votre compte à bien été créé, ' .
+                'merci de confirmer votre adresse mail en cliquant sur le bouton suivant'
+            )
+            ->action(
+                'Confirmer mon adresse mail',
+                route('auth.confirm', [$notifiable->id, urlencode($notifiable->verify_token)])
+            )
             ->line('Merci de votre inscrption');
     }
 

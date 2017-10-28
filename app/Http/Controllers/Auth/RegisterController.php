@@ -99,10 +99,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $default = null;
+        $size = 40;
+        $avatar = "https://www.gravatar.com/avatar/";
+        $avatar .= md5(strtolower(trim($data['email'])));
+        $avatar .= "?d=";
+        $avatar .= urlencode($default);
+        $avatar .= "&s=";
+        $avatar .= $size;
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'verify_token' => str_replace('/', '', bcrypt(str_random(16))),
+            'avatar' => $avatar
         ]);
     }
 }

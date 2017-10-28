@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('layout')
+{{-- TODO: Transformer le style en bootstrap4 --}}
 @section('content')
 <div class="container">
     <div class="row">
