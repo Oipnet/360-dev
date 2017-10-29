@@ -16,7 +16,8 @@ class UserTableSeeder extends Seeder
     {
         factory(User::class, 50)->create();
 
-        //TODO: Exemple d'utilisation du système de role et de permission
+        /** Exemple d'utilisation du système de role et de permission */
+
         $user = new Role();
         $user->name = 'user';
         $user->display_name = 'Classic User';

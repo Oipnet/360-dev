@@ -23,25 +23,41 @@
                     <a href="#"
                        class="nav-link dropdown-toggle"
                        id="navbarDropdownMenuLink"
-                       data-toggle="navbarDropdownMenuLink"
+                       data-toggle="dropdown"
                        aria-expanded="false"
                        aria-haspopup="true"
                     >
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a href="{{ route('home') }}" class="dropdown-item"><span class="oi oi-person"></span> Mon Profil</a>
-                        <a class="dropdown-item text-danger"
-                           href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();"
-                        >
-                            <span class="oi oi-account-logout"></span> Se déconnecter
-                        </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-item">
+                            <a href="{{ route('home') }}" class="nav-link text-primary">
+                                <span class="oi oi-person"></span>
+                                Mon Profil
+                            </a>
+                        </li>
+                        @if(Auth::user()->hasRole('admin'))
+                            <li class="dropdown-item">
+                                <a href="{{ route('admin.user.index') }}" class="nav-link text-primary">
+                                    <span class="oi oi-code"></span>
+                                    Administration
+                                </a>
+                            </li>
+                        @endif
+                        <li class="dropdown-item">
+                            <a href="{{ route('logout') }}"
+                               class="nav-link text-danger"
+                               onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"
+                            >
+                                <span class="oi oi-account-logout"></span>
+                                Se déconnecter
+                            </a>
+                        </li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
-                    </div>
+                    </ul>
                 </li>
             @endguest
         </ul>

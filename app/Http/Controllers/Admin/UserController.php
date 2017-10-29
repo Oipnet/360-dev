@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Concern\Admin\TraitAdminController;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,6 +22,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (! Auth::user()->hasRole('admin')) {
+            return redirect()->back();
+        }
         $items = User::with('roles')->get();
         return view('admin.' . $this->view . '.index', compact('items'));
     }
