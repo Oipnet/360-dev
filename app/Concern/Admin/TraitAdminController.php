@@ -3,7 +3,7 @@
 namespace App\Concern\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Trait TraitAdminController
@@ -32,9 +32,6 @@ trait TraitAdminController
      */
     public function index()
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
         $items = $this->model::all();
         return view('admin.' . $this->view . '.index', compact('items'));
     }
@@ -46,9 +43,7 @@ trait TraitAdminController
      */
     public function create()
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('create', $this->model);
         $item = new $this->model;
         return view('admin.' . $this->view . '.form', compact('item'));
     }
@@ -61,9 +56,8 @@ trait TraitAdminController
      */
     public function store(Request $request)
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('create', $this->model);
+        Validator::make($request->all(), $this->validator)->validate();
         $this->model::create($request->all());
         return $this->index()->with('success', 'Nouvel entité créé');
     }
@@ -71,14 +65,12 @@ trait TraitAdminController
     /**
      * Display the specified resource.
      *
-     * @param $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('view', $this->model);
         $item = $this->model::where('id', $id)->first();
         return view('admin.' . $this->view . '.show', compact('item'));
     }
@@ -86,14 +78,12 @@ trait TraitAdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('update', $this->model);
         $item = $this->model::where('id', $id)->first();
         return view('admin.' . $this->view . '.form', compact('item'));
     }
@@ -102,30 +92,24 @@ trait TraitAdminController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param                           $id
+     * @param  int                         $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('update', $this->model);
         $item = $this->model::where('id', $id)->first();
         $item->update($request->all());
         return $this->index()->with('success', 'Entité modifié avec succès');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return mixed
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        if (! Auth::user()->hasRole('admin')) {
-            return redirect()->back();
-        }
+        $this->authorize('delete', $this->model);
         $item = $this->model::where('id', $id)->first();
         $item->delete();
         return $this->index()->with('success', 'Entité supprimé');

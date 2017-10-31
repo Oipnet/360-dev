@@ -12,4 +12,6 @@ class PostController extends Controller
     const __MODEL = 'App\\Model\\Post';
 
     protected $view = 'post';
+
+    protected $validator = [];
 }

@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
  * @property mixed content
  * @property mixed $category
  * @property mixed $user
+ * @property mixed user_id
  */
 class Post extends Model
 {

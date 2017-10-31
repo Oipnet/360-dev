@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Model\Role;
 use App\Model\User;
 use App\Http\Controllers\Controller;
 use App\Notifications\RegisteredUser;
@@ -68,6 +69,8 @@ class RegisterController extends Controller
     {
         $user = User::where([['id', $id], ['verify_token', $token]])->first();
         if ($user) {
+            $role = Role::where('name', 'user')->first();
+            $user->roles()->attach($role);
             $user->update(['veriffy_token' => null]);
             $this->guard()->login($user);
             return redirect($this->redirectPath());

@@ -12,4 +12,6 @@ class RoleController extends Controller
     const __MODEL = 'App\\Model\\Role';
 
     protected $view = 'role';
+
+    protected $validator = [];
 }

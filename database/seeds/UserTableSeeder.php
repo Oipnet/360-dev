@@ -1,6 +1,5 @@
 <?php
 
-use App\Model\Permission;
 use App\Model\Role;
 use App\Model\User;
 use Illuminate\Database\Seeder;
@@ -16,44 +15,20 @@ class UserTableSeeder extends Seeder
     {
         factory(User::class, 50)->create();
 
-        /** Exemple d'utilisation du système de role et de permission */
+        $users = User::all();
 
-        $user = new Role();
-        $user->name = 'user';
-        $user->display_name = 'Classic User';
-        $user->description = 'All user registered';
-        $user->save();
+        $user = Role::where('name', 'user')->first();
+        $admin = Role::where('name', 'admin')->first();
+        $redactor = Role::where('name', 'redactor')->first();
+        $moderator = Role::where('name', 'moderator')->first();
+        $root = Role::where('name', 'root')->first();
 
-        $admin = new Role();
-        $admin->name = 'admin';
-        $admin->display_name = 'Administrator';
-        $admin->description = 'User is allowed to manage and edit users';
-        $admin->save();
-
-        $redactor = new Role();
-        $redactor->name = 'redactor';
-        $redactor->display_name = 'Redactor';
-        $redactor->description = 'User can write a post';
-        $redactor->save();
-
-        $editUser = new Permission();
-        $editUser->name = 'edit-user';
-        $editUser->display_name = "Edit Users";
-        $editUser->description = 'Edit existing users';
-        $editUser->save();
-
-        $createPost = new Permission();
-        $createPost->name = 'create-post';
-        $createPost->display_name = 'Create Posts';
-        $createPost->description = 'Create new post';
-        $createPost->save();
-
-        $redactor->attachPermission($createPost);
-        $admin->attachPermissions([$createPost, $editUser]);
-
-        $users = User::get();
-        $users[0]->attachRole($user);
-        $users[1]->attachRole($admin);
-        $users[2]->attachRole($redactor);
+        for ($i = 0; $i < 10; $i++) {
+            $users[$i]->roles()->save($user);
+            $users[$i + 10]->roles()->save($admin);
+            $users[$i + 20]->roles()->save($redactor);
+            $users[$i + 30]->roles()->save($moderator);
+            $users[$i + 40]->roles()->save($root);
+        }
     }
 }
