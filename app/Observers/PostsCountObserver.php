@@ -35,5 +35,4 @@ class PostsCountObserver
             Category::where('id', $post->category_id)->increment('posts_count');
         }
     }
-
 }
