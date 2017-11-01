@@ -3,6 +3,8 @@
 <head>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/flash.css">
+    <script type="text/javascript" src="/js/flash.min.js"></script>
 
     <style type="text/css">
         header,
@@ -158,6 +160,10 @@
 </header>
 
 <main>
+
+    @if (session()->has('success'))
+        <script type="text/javascript">window.FlashMessage.success('{{ session()->get('success') }}')</script>
+    @endif
     @yield('content')
 </main>
 
@@ -191,7 +197,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('.button-collapse').sideNav();

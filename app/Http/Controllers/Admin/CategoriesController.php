@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Concern\HasRedirect;
 use App\Http\Tools\Method;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 class CategoriesController extends Controller
@@ -33,14 +35,28 @@ class CategoriesController extends Controller
      */
     public function create(FormBuilder $formBuilder): Response
     {
-        $form = $formBuilder->plain(['method' => Method::POST, 'route' => 'categories.store'])
+        $form = $this->getForm($formBuilder, ['method' => Method::POST, 'route' => 'categories.store']);
+        return response()->view('admin.categories.create', compact('form'));
+    }
+
+    /**
+     * @param FormBuilder $formBuilder
+     * @param array $options
+     * @param null $model
+     * @return Form
+     */
+    private function getForm(FormBuilder $formBuilder, array $options, $model = null): Form
+    {
+        if (!is_null($model)) {
+            $options = array_merge(['model' => $model], $options);
+        }
+        return $formBuilder->plain($options)
             ->add('name', 'text')
             ->add('slug', 'text')
             ->add('submit', 'submit', [
                 'label' => 'Enregistrer',
                 'attr'  => ['class' => 'btn btn waves-effect waves-light']
             ]);
-        return response()->view('admin.categories.create', compact('form'));
     }
 
     /**
@@ -54,7 +70,9 @@ class CategoriesController extends Controller
         $category = Category::create($request->all());
         if ($category) {
             return $this->redirectWithMessage(
-                $request, 'categories.index', "La catégorie a été ajouté avec succès."
+                $request,
+                'categories.index',
+                "La catégorie a été ajouté avec succès."
             );
         }
         return redirect()->back();
@@ -74,34 +92,54 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @param FormBuilder $formBuilder
+     * @return Response
      */
-    public function edit($id)
+    public function edit(int $id, FormBuilder $formBuilder): Response
     {
-        //
+        $category = Category::findOrFail($id);
+        $form     = $this->getForm(
+            $formBuilder,
+            ['method' => Method::PUT, 'url'  => route('categories.update', $category)],
+            $category
+        );
+        return response()->view('admin.categories.edit', compact('category', 'form'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param Category $category
+     * @return Response|RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        if ($category->update($request->all())) {
+            return $this->redirectWithMessage(
+                $request,
+                'categories.index',
+                "La catégorie a bien été édité"
+            );
+        }
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Category $category
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Category $category)
     {
-        //
+        if ($category->delete()) {
+            $message = sprintf("La catégorie %s a bien été supprimé.", $category->name);
+            return $this->redirectWithMessage($request, 'posts.index', $message);
+        }
+        $message = sprintf("La catégorie %s n'a pas pu être supprimé.", $category->name);
+        return $this->redirectWithMessage($request, 'posts.index', $message);
     }
 }
