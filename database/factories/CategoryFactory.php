@@ -17,6 +17,6 @@ $factory->define(App\Category::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
-        'slug' => $faker->slug,
+        'slug' => \Illuminate\Support\Str::slug($faker->name()),
     ];
 });

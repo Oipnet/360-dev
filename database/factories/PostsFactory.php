@@ -16,8 +16,8 @@ use Faker\Generator as Faker;
 $factory->define(App\Post::class, function (Faker $faker) {
 
     return [
-        'name'    => $faker->name,
-        'slug'    => $faker->slug,
+        'name'    => $faker->name(),
+        'slug'    => \Illuminate\Support\Str::slug($faker->name()),
         'content' => $faker->text(1000),
         'image'   => $faker->imageUrl(),
         'category_id' => function () {
