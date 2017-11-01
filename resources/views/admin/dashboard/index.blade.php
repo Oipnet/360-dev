@@ -21,7 +21,7 @@
                     <div class="col s1">&nbsp;</div>
                     <div class="col s1">&nbsp;</div>
 
-                    <a href="#!">
+                    <a href="{{ route('categories.index') }}">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                             <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989969/people_2_knqa3y.png" class="responsive-img" /><br>
                             <span class="indigo-text text-lighten-1"><h5>Catégories</h5></span>
