@@ -15,9 +15,13 @@ trait HasSlug
      */
     public function setSlugAttribute(?string $slug): void
     {
+        $attributeName = 'slug';
         /** @var $this Model */
-        if ($this->name && !$slug) {
-            $this->attributes['slug'] = Str::slug($this->name);
+        if ($this->name && is_null($slug)) {
+            $this->attributes[$attributeName] = Str::slug($this->name);
+        }
+        else {
+            $this->attributes[$attributeName] = $slug;
         }
     }
 }
