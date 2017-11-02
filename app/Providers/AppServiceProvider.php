@@ -22,8 +22,6 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_DEBUG')) {
             $this->register(Debugbar\ServiceProvider::class);
         }
-        // Add obersations class
-        Post::observe(PostsCountObserver::class);
     }
 
     /**
