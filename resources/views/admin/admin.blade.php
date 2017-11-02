@@ -61,7 +61,7 @@
                 <img style="margin-top: 5%;" width="100" height="100" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463990208/photo_dkkrxc.png" class="circle responsive-img" />
 
                 <p style="margin-top: -13%;">
-                    Tirth Patel
+                    360° Dev
                 </p>
             </div>
         </div>
@@ -159,7 +159,7 @@
     </nav>
 </header>
 
-<main>
+<main id="app">
 
     @if (session()->has('success'))
         <script type="text/javascript">window.FlashMessage.success('{{ session()->get('success') }}')</script>
@@ -204,6 +204,7 @@
     $('select').material_select();
   });
 </script>
+<script type="text/javascript" src="/js/app.js"></script>
 
 </body>
 </html>
