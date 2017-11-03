@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Observers\PostsCountObserver;
-use App\Post;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Barryvdh\Debugbar;
