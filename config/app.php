@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
 
+
         /*
          * Application Service Providers...
          */
@@ -228,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Project aliases
-        'Menu' => \App\Helpers\MenuHelper::class
+        'Menu' => \App\Helpers\MenuHelper::class,
     ],
 
 ];

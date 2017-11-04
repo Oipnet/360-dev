@@ -10,9 +10,56 @@
                 <a class="nav-link {{ Menu::isActive('Posts') }}" href="{{ route('blog.index') }}">Blog</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav my-2 my-lg-0">
+            @guest
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('register') }}" class="nav-link">Register</a>
+                </li>
+            @else
+                <li class="nav-item dropdown">
+                    <a href="#"
+                       class="nav-link dropdown-toggle"
+                       id="navbarDropdownMenuLink"
+                       data-toggle="dropdown"
+                       aria-expanded="false"
+                       aria-haspopup="true"
+                    >
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-item">
+                            <a href="{{ route('home') }}" class="nav-link text-primary">
+                                <span class="oi oi-person"></span>
+                                Mon Profil
+                            </a>
+                        </li>
+                        @if(Auth::user()->hasRole('admin'))
+                            <li class="dropdown-item">
+                                <a href="{{ route('admin.user.index') }}" class="nav-link text-primary">
+                                    <span class="oi oi-code"></span>
+                                    Administration
+                                </a>
+                            </li>
+                        @endif
+                        <li class="dropdown-item">
+                            <a href="{{ route('logout') }}"
+                               class="nav-link text-danger"
+                               onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"
+                            >
+                                <span class="oi oi-account-logout"></span>
+                                Se déconnecter
+                            </a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </ul>
+                </li>
+            @endguest
+        </ul>
     </div>
 </nav>
