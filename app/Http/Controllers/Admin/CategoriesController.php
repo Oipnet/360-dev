@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Concern\HasRedirect;
 use App\Http\Tools\Method;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ use Kris\LaravelFormBuilder\FormBuilder;
 
 class CategoriesController extends Controller
 {
-    use HasRedirect;
 
     /**
      * Display a listing of the resource.
@@ -69,11 +67,7 @@ class CategoriesController extends Controller
     {
         $category = Category::create($request->all());
         if ($category) {
-            return $this->redirectWithMessage(
-                $request,
-                'categories.index',
-                "La catégorie a été ajouté avec succès."
-            );
+            return redirect(route('categories.index'))->with('success', "La catégorie a été ajouté avec succès.");
         }
         return redirect()->back();
     }
@@ -117,11 +111,7 @@ class CategoriesController extends Controller
     public function update(Request $request, Category $category)
     {
         if ($category->update($request->all())) {
-            return $this->redirectWithMessage(
-                $request,
-                'categories.index',
-                "La catégorie a bien été édité"
-            );
+            return redirect(route('categories.index'))->with('success', "La catégorie a bien été édité");
         }
         return redirect()->back();
     }
@@ -129,17 +119,16 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
      * @param Category $category
      * @return Response
      */
-    public function destroy(Request $request, Category $category)
+    public function destroy(Category $category)
     {
         if ($category->delete()) {
             $message = sprintf("La catégorie %s a bien été supprimé.", $category->name);
-            return $this->redirectWithMessage($request, 'posts.index', $message);
+            return redirect('categories.index')->with('success', $message);
         }
         $message = sprintf("La catégorie %s n'a pas pu être supprimé.", $category->name);
-        return $this->redirectWithMessage($request, 'posts.index', $message);
+        return redirect('categories.index')->with('error', $message);
     }
 }

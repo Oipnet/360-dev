@@ -14,7 +14,10 @@ return [
             'field_class'   => 'materialize-textarea'
         ],
         'input'               => [
-            'wrapper_class' => 'input-field'
+            'wrapper_class' => 'input-field',
+        ],
+        'select'               => [
+            'field_class'   => 'browser-default',
         ],
         'submit'              => [
             'wrapper_class' => 'input-field'

@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Concern\HasRedirect;
 use App\Forms\PostsForm;
 use App\Http\Controllers\Controller;
 use App\Http\Tools\Method;
@@ -9,6 +8,7 @@ use App\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 /**
@@ -18,25 +18,24 @@ use Kris\LaravelFormBuilder\FormBuilder;
  */
 class PostsController extends Controller
 {
-    use HasRedirect;
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|View
+     * @return Response
      */
-    public function index(): View
+    public function index(): Response
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
-        return view('admin.posts.index', compact('posts'));
+        return response()->view('admin.posts.index', compact('posts'));
     }
 
     /**
      * @param FormBuilder $formBuilder
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Response
      */
-    public function create(FormBuilder $formBuilder)
+    public function create(FormBuilder $formBuilder): Response
     {
         $form = $this->getForm($formBuilder, route('posts.store'));
-        return view('admin.posts.create', compact('form'));
+        return response()->view('admin.posts.create', compact('form'));
     }
 
     /**
@@ -59,7 +58,7 @@ class PostsController extends Controller
     {
         $post = Post::create($request->all());
         if ($post) {
-            return $this->redirectWithMessage($request, 'posts.index', "L'article a bien été ajouté");
+            return redirect(route('posts.index'))->with('success', "L'article a bien été ajouté");
         }
         return redirect()->back();
     }
@@ -67,9 +66,9 @@ class PostsController extends Controller
     /**
      * @param int $id
      * @param FormBuilder $formBuilder
-     * @return \Illuminate\Contracts\View\Factory|View
+     * @return Response
      */
-    public function edit(int $id, FormBuilder $formBuilder): View
+    public function edit(int $id, FormBuilder $formBuilder): Response
     {
         $post = Post::findOrFail($id);
         $form = $this->getForm(
@@ -78,7 +77,7 @@ class PostsController extends Controller
             Method::PUT,
             $post
         );
-        return view('admin.posts.edit', compact('post', 'form'));
+        return response()->view('admin.posts.edit', compact('post', 'form'));
     }
 
     /**
@@ -89,21 +88,20 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         if ($post->update($request->all())) {
-            return $this->redirectWithMessage($request, 'posts.index', "L'article a bien été édité");
+            return redirect(route('posts.index'))->with('success', "L'article a bien été édité");
         }
         return redirect()->back();
     }
 
     /**
      * @param Post $post
-     * @param Request $request
      * @return RedirectResponse
      */
-    public function destroy(Post $post, Request $request): RedirectResponse
+    public function destroy(Post $post): RedirectResponse
     {
         if ($post->delete()) {
-            return $this->redirectWithMessage($request, 'posts.index', "L'article a bien été supprimé.");
+            return redirect(route('posts.index'))->with('success', "L'article a bien été supprimé.");
         }
-        return $this->redirectWithMessage($request, 'posts.index', "L'article n'a pas pu être supprimé.");
+        return redirect(route('posts.index'))->with('error', "L'article n'a pas pu être supprimé.");
     }
 }

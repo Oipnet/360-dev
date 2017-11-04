@@ -15,7 +15,7 @@
                     <a href="{{ route('posts.index') }}">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
                             <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989968/seller_rcnkab.png" class="responsive-img" /><br>
-                            <span class="indigo-text text-lighten-1"><h5>Articles</h5></span>
+                            <span class="indigo-text text-lighten-1"><h5>Articles ({{ $posts_count }})</h5></span>
                         </div>
                     </a>
                     <div class="col s1">&nbsp;</div>

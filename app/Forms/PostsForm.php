@@ -24,9 +24,12 @@ class PostsForm extends Form
             ->add('user_id', 'hidden', ['value' => 1]);
 
         // Entity
-        $this->addBefore('content', 'category_id', 'entity', [
-            'class'    => Category::class,
-            'property' => 'name'
+        $this->addBefore('image', 'category_id', 'entity', [
+            'class'       => Category::class,
+            'property'    => 'name',
+            'empty_value' => '== Select categorie ==',
+            'label_show'  => false,
+            'attr'        => ['class' => 'browser-default']
         ]);
 
         // Button
