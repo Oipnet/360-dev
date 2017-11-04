@@ -3,22 +3,13 @@
 namespace Tests\Feature;
 
 use App\Post;
-use Illuminate\Support\Facades\Artisan;
-use Tests\TestCase;
 
-class PostsCountTest extends TestCase
+class PostsCountTest extends TestWithDbCase
 {
-
-    public function setUp()
-    {
-        parent::setUp();
-        Artisan::all('migrate');
-    }
 
     public function testCreatePosts()
     {
-        Post::create(['name' => 'test', 'slug' => 'test', 'content' => 'aza']);
-        $this->assertEquals(1, Post::count());
+        $post = factory(Post::class)->create();
+        $this->assertEquals(1, $post->count());
     }
-
 }
