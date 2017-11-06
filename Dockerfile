@@ -7,5 +7,5 @@ ADD . /app
 RUN chmod +x /app/docker.sh
 WORKDIR /app
 RUN ./docker.sh
-EXPOSE 8000
+EXPOSE 8000:8000 3306:3306
 
