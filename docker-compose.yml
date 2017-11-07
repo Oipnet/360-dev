@@ -1,30 +1,41 @@
-front:
-  build: .
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8000:8000"
-      - "9000:9000"
-    links:
-      - mysql:mysql
-      - redis:redis
+version: '2'
+services:
+
+  # The Application
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www
     volumes:
-      - .:/app
-    depends_on:
-      - mysql
-      - redis 
+      - ./:/var/www
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=database"
 
-mysql:
-  image: mysql
-  ports:
-    - "3306:3306"
-  environment:
-    MYSQL_ROOT_PASSWORD: password
-    MYSQL_DATABASE: homestead
-    MYSQL_USER: homestead
-    MYSQL_PASSWORD: secret
+  # The Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    ports:
+      - 8080:80
 
-redis:
-  image: redis
-  ports:
-    - "6379:6379"
+  # The Database
+  database:
+    image: mysql:5.6
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=homestead"
+      - "MYSQL_USER=homestead"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    ports:
+        - "33061:3306"
+
+volumes:
+  dbdata:
