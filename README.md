@@ -70,6 +70,7 @@ $ docker-compose up
 
 $ docker-compose start app /bin/bash/
 $ chmod +x docker.sh 
+$ ./docker.sh 
 $ php artisan serve
 
 ```
