@@ -57,6 +57,23 @@ Vous pouvez accéder à l'application à l'adresse suivant : http://localhost:80
 
 Diagramme UML du projet : http://www.laravelsd.com/share/smezUK (pas encore définitif)
 
+## Docker
+
+Pour lancer la construction de l'image
+
+```bash
+
+$ docker-compose build 
+$ docker-compose up
+
+# Dans un autre terminal 
+
+$ docker-compose start app /bin/bash/
+$ chmod +x docker.sh 
+$ php artisan serve
+
+```
+
 ## Contribuer
 
 Pour contribuer il faut respecter les normes de commit et de convensions de codage décris dans le 
