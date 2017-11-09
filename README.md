@@ -68,7 +68,7 @@ $ docker-compose up
 
 # Dans un autre terminal 
 
-$ docker-compose start app /bin/bash/
+$ docker-compose run app /bin/bash
 $ chmod +x docker.sh 
 $ ./docker.sh 
 $ php artisan serve
