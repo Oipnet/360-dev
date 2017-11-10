@@ -9,4 +9,20 @@ php -r "unlink('composer-setup.php');"
 
 apt-get update
 apt-get install -y unzip 
+
+# Installation nodejs et npm à faire
+# Installation des dépendances npm
+# LIer le localhost au container
 php composer.phar install
+php composer.phar
+
+# From stackoverflow https://stackoverflow.com/questions/7739645/install-mysql-on-ubuntu-without-password-prompt
+# debconf-set-selections <<< 'mysql-server mysql-server/root_password password grootmyfriend'
+# debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password grootmyfriend'
+# apt-get -y install mysql-server
+
+# Lancement mysql et creation des tables
+#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
+service mysql start
+mysql -h127.0.0.1 -P3306 -uroot -e "UPDATE mysql.user SET password = PASSWORD('groot') WHERE user = 'root'"
+mysql -uroot -pgroot -e "CREATE DATABASE homestead;"
