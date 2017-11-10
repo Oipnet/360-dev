@@ -9723,3 +9723,7 @@ a.text-dark:hover {
   padding-top: 75px;
 }
 
+.delete-inline {
+  display: inline-block !important;
+}
+
