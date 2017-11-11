@@ -63,15 +63,19 @@ Pour lancer la construction de l'image
 
 ```bash
 
-$ docker-compose build 
 $ docker-compose up
 
-# Dans un autre terminal 
+```
+Sous linux 
 
-$ docker-compose run app /bin/bash
-$ chmod +x docker.sh 
-$ ./docker.sh 
-$ php artisan serve
+Aller sur votre navigateur à l'adresse http://localhost:3000
+
+Vous devriez voir une erreur 500 laravel
+
+Lancer un terminal sous l'environnement docker
+
+```
+$ docker-compose run web /bin/bash
 
 ```
 
