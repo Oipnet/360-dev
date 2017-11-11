@@ -86,12 +86,11 @@
         </li>
 
         <li id="dash_products">
-            <div id="dash_products_header" class="collapsible-header waves-effect"><b>Products</b></div>
+            <div id="dash_products_header" class="collapsible-header waves-effect"><b>Utilisateurs</b></div>
             <div id="dash_products_body" class="collapsible-body">
                 <ul>
                     <li id="products_product">
-                        <a class="waves-effect" style="text-decoration: none;" href="#!">Products</a>
-                        <a class="waves-effect" style="text-decoration: none;" href="#!">Orders</a>
+                        <a class="waves-effect" style="text-decoration: none;" href="{{ route('users.index') }}">Membres</a>
                     </li>
                 </ul>
             </div>

@@ -19,8 +19,9 @@ Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.cate
 // Admin Dashboard
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('/', 'DashboardController@index')->name('admin.index');
-    Route::resource('posts', 'PostsController');
+    Route::resource('posts',      'PostsController');
     Route::resource('categories', 'CategoriesController');
+    Route::resource('users',      'UserController');
 });
 
 Auth::routes();
