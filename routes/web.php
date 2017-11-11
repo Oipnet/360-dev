@@ -17,8 +17,10 @@ Route::resource('blog', 'PostsController');
 Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');
 
 // Admin Dashboard
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
-    Route::resource('posts', 'Admin\PostsController');
-    Route::resource('categories', 'Admin\CategoriesController');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/', 'DashboardController@index')->name('admin.index');
+    Route::resource('posts', 'PostsController');
+    Route::resource('categories', 'CategoriesController');
 });
+
+Auth::routes();

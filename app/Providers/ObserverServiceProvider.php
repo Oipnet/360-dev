@@ -11,7 +11,6 @@ use Illuminate\Support\ServiceProvider;
 class ObserverServiceProvider extends ServiceProvider
 {
 
-
     public function boot()
     {
         // Add obersations class

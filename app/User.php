@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,5 +35,22 @@ class User extends Authenticatable
     public function posts(): BelongsTo
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->roles === Role::ADMIN;
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->roles === $role;
     }
 }

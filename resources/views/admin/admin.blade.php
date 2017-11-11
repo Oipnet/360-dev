@@ -59,7 +59,6 @@
         <div class="indigo darken-2 white-text" style="height: 180px;">
             <div class="row">
                 <img style="margin-top: 5%;" width="100" height="100" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463990208/photo_dkkrxc.png" class="circle responsive-img" />
-
                 <p style="margin-top: -13%;">
                     360° Dev
                 </p>
@@ -68,6 +67,7 @@
     </li>
 
     <li id="dash_dashboard"><a class="waves-effect" href="{{ route('admin.index') }}"><b>Dashboard</b></a></li>
+    <li id="dash_dashboard"><a class="waves-effect" href="{{ route('home.index') }}" target="_blank"><b>Aller sur le site</b></a></li>
 
     <ul class="collapsible" data-collapsible="accordion">
         <li id="dash_users">
@@ -131,8 +131,13 @@
 
 <header>
     <ul class="dropdown-content" id="user_dropdown">
+        @auth
         <li><a class="indigo-text" href="#!">Profile</a></li>
-        <li><a class="indigo-text" href="#!">Logout</a></li>
+        <li><form action="{{ route('logout') }}" class="form-inline" method="post">
+                {{ csrf_field() }}
+                <button type="submit" class="">Se déconnecter</button>
+         </form></li>
+        @endauth
     </ul>
 
     <nav class="indigo" role="navigation">

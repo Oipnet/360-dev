@@ -20,6 +20,7 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'slug'    => $faker->slug,
         'content' => $faker->text(1000),
         'image'   => $faker->imageUrl(),
+        'online'  => true,
         'category_id' => function () {
             return factory(\App\Category::class)->create()->id;
         },
