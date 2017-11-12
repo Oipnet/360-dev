@@ -23,7 +23,7 @@
                         <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
                         <td>{{ $user->roles }}</td>
                         <td>
-                            <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn waves-effect waves-light">
+                            <a href="{{ route('users.edit', $user) }}" class="btn waves-effect waves-light">
                                 <i class="material-icons">mode_edit</i> Editer
                             </a>
                             <form action="{{ route('users.destroy', $user) }}" method="post" class="delete-inline" style="display: inline-block;">

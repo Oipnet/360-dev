@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Forms\PostsForm;
+use App\Forms\Admin\PostsForm;
 use App\Http\Controllers\Controller;
 use App\Http\Tools\Method;
 use App\Post;

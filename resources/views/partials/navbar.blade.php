@@ -9,6 +9,11 @@
             <li class="nav-item">
                 <a class="nav-link {{ Menu::isActive('Posts') }}" href="{{ route('blog.index') }}">Blog</a>
             </li>
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link">Administration</a></li>
+                @endif
+            @endauth
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
             @if (Route::has('login'))

@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Forms;
+namespace App\Forms\Admin;
 
 use App\Category;
-use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class PostsForm
  *
  * Manage the admin form of the articles.
  */
-class PostsForm extends Form
+class PostsForm extends AdminForm
 {
     public function buildForm()
     {
@@ -33,9 +32,6 @@ class PostsForm extends Form
         ]);
 
         // Button
-        $this->add('submit', 'submit', [
-            'label' => 'Enregistrer',
-            'attr'  => ['class' => 'btn btn waves-effect waves-light']
-        ]);
+        $this->addButton();
     }
 }
