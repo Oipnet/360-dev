@@ -7,6 +7,7 @@ use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Michelf\Markdown;
 
 /**
  * Class Post
@@ -59,5 +60,10 @@ class Post extends Model
     public function getOnlineAttribute(bool $online): string
     {
         return $online ? 'Oui' : 'Non';
+    }
+
+    public function getHtmlAttribute()
+    {
+        return Markdown::defaultTransform($this->content);
     }
 }

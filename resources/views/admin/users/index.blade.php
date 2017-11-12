@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td><a href="{{ route('users.edit', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
-                        <td>{{ $user->roles }}</td>
+                        <td>{{ $user->role }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user) }}" class="btn waves-effect waves-light">
                                 <i class="material-icons">mode_edit</i> Editer
