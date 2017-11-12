@@ -3,6 +3,7 @@
 namespace App\Forms\Admin;
 
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PostsForm
@@ -20,7 +21,7 @@ class PostsForm extends AdminForm
             ->add('image', 'text')
             ->add('content', 'textarea')
             ->add('online', 'checkbox')
-            ->add('user_id', 'hidden', ['value' => 1]);
+            ->add('user_id', 'hidden', ['value' => Auth::user()->id]);
 
         // Entity
         $this->addBefore('image', 'category_id', 'entity', [

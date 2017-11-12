@@ -12,6 +12,7 @@
                     <th>ID</th>
                     <th>Titre</th>
                     <th>URL</th>
+                    <th>Auteur</th>
                     <th>En ligne ?</th>
                     <th>Actions</th>
                 </tr>
@@ -23,6 +24,7 @@
                         <td>{{ $post->id }}</td>
                         <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}">{{ $post->name }}</a></td>
                         <td>{{ $post->slug }}</td>
+                        <td>{{ $post->user->name }}</td>
                         <td>{{ $post->online }}</td>
                         <td>
                             <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn waves-effect waves-light">
