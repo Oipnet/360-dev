@@ -23,7 +23,7 @@
 
                     <a href="{{ route('categories.index') }}">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989969/people_2_knqa3y.png" class="responsive-img" /><br>
+                            <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989970/product_mdq6fq.png" class="responsive-img" /><br>
                             <span class="indigo-text text-lighten-1"><h5>Catégories</h5></span>
                         </div>
                     </a>
@@ -35,14 +35,14 @@
             <div style="padding: 35px;" align="center" class="card">
                 <div class="row">
                     <div class="left card-title">
-                        <b>Product Management</b>
+                        <b>Gérer les utilisateurs</b>
                     </div>
                 </div>
                 <div class="row">
-                    <a href="#!">
+                    <a href="{{ route('users.index') }}">
                         <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                            <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989970/product_mdq6fq.png" class="responsive-img" /><br>
-                            <span class="indigo-text text-lighten-1"><h5>Product</h5></span>
+                            <img src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989969/people_2_knqa3y.png" class="responsive-img" /><br>
+                            <span class="indigo-text text-lighten-1"><h5>Membres</h5></span>
                         </div>
                     </a>
 
