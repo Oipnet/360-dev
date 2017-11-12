@@ -11,6 +11,7 @@ class UsersTest extends TestWithDbCase
         $user      = factory(User::class)->create();
         $response  = $this->actingAs($user)->get('/admin');
         $response->assertStatus(302);
+        $response->assertRedirect('/');
     }
 
     public function testAccessDashboardIfIsAdmin()
