@@ -15,6 +15,16 @@
 <body>
 @include('./partials/navbar')
 <div class="container content">
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            <p>{{ session()->get('success') }}</p>
+        </div>
+    @endif
+    @if (session()->has('danger'))
+        <div class="alert alert-danger">
+            <p>{{ session()->get('danger') }}</p>
+        </div>
+    @endif
     @yield('content')
 </div>
     <hr>
