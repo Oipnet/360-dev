@@ -4,6 +4,7 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <link rel="stylesheet" href="/css/flash.css">
+    <link rel="stylesheet" href="/css/mdeditor.css">
     <script type="text/javascript" src="/js/flash.min.js"></script>
 
     <style type="text/css">
@@ -203,6 +204,15 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
 <script type="text/javascript" src="/js/app.js"></script>
-
+<script type="text/javascript" src={{ asset("/js/mdeditor.min.js") }}></script>
+<script type="text/javascript">
+  var md = new MdEditor('#mdeditor', {
+    uploader: false, //'http://local.dev/Lab/MdEditor/app/upload.php?id=',
+    preview: true,
+    images: [
+      {id: '1.jpg', url: 'http://lorempicsum.com/futurama/200/200/1'},
+    ]
+  });
+</script>
 </body>
 </html>
