@@ -5,6 +5,12 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
+/**
+ * CheckRole
+ *
+ * The middleware that checks access to a part of the site with the role received as a parameter of the route.
+ * @example : ... 'middleware' => ['auth', 'role:admin']] ...
+ */
 class CheckRole
 {
     /**
