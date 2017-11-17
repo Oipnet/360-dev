@@ -61,8 +61,10 @@ Diagramme UML du projet : http://www.laravelsd.com/share/smezUK (pas encore déf
 
 Pour lancer la construction de l'image
 
-```bash
+Changer le .env.example en .env
 
+```bash
+$ mv .env.example .env
 $ docker-compose up
 
 ```
