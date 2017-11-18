@@ -17,15 +17,15 @@ class CreatePostsTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->default('');
             $table->timestamps();
         });
 
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('slug');
-            $table->string('image')->nullable();
+            $table->string('slug')->default('');
+            $table->string('image')->nullable()->default(0);
             $table->longText('content');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')

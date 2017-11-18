@@ -17,6 +17,7 @@ trait PostRepository
     public static function onlinePosts()
     {
         return self::with('category', 'user')
-            ->where('online', true);
+            ->where('online', true)
+            ->orderBy('created_at', 'desc');
     }
 }
