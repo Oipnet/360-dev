@@ -57,6 +57,30 @@ Vous pouvez accéder à l'application à l'adresse suivant : http://localhost:80
 
 Diagramme UML du projet : http://www.laravelsd.com/share/smezUK (pas encore définitif)
 
+## Docker
+
+Pour lancer la construction de l'image
+
+Changer le .env.example en .env
+
+```bash
+$ mv .env.example .env
+$ docker-compose up
+
+```
+Sous linux 
+
+Aller sur votre navigateur à l'adresse http://localhost:3000
+
+Vous devriez voir une erreur 500 laravel
+
+Lancer un terminal sous l'environnement docker
+
+```
+$ docker-compose run web /bin/bash
+
+```
+
 ## Contribuer
 
 Pour contribuer il faut respecter les normes de commit et de convensions de codage décris dans le 
