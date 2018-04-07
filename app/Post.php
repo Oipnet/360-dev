@@ -6,6 +6,7 @@ use App\Concern\HasSlug;
 use App\Concern\Repository\PostRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Michelf\Markdown;
 
@@ -66,4 +67,13 @@ class Post extends Model
     {
         return Markdown::defaultTransform($this->content);
     }
+
+		/**
+		 * @param UploadedFile $image
+		 * @return string
+		 */
+    public function getImageName(UploadedFile $image): string
+		{
+				return $this->id . '.' . $image->clientExtension();
+		}
 }

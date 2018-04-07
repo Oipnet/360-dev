@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers;
 
+use App\Observers\PostImageObserver;
 use App\Observers\PostsCountObserver;
 use App\Post;
 use Illuminate\Support\ServiceProvider;
@@ -15,6 +16,7 @@ class ObserverServiceProvider extends ServiceProvider
     {
         // Add obersations class
         Post::observe(PostsCountObserver::class);
+        Post::observe(PostImageObserver::class);
     }
 
     public function register()

@@ -5,6 +5,7 @@ use App\Forms\Admin\PostsForm;
 use App\Http\Controllers\Controller;
 use App\Http\Tools\Method;
 use App\Post;
+use App\Repository\PostRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,12 +20,13 @@ use Kris\LaravelFormBuilder\FormBuilder;
 class PostsController extends Controller
 {
 
-    /**
-     * @return Response
-     */
-    public function index(): Response
+		/**
+		 * @param PostRepository $postRepository
+		 * @return Response
+		 */
+    public function index(PostRepository $postRepository): Response
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts = $postRepository->getByOrderDesc();
         return response()->view('admin.posts.index', compact('posts'));
     }
 
@@ -50,15 +52,18 @@ class PostsController extends Controller
         return $formBuilder->create(PostsForm::class, compact('method', 'url', 'model'));
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+		/**
+		 * @param Request $request
+		 * @param PostRepository $postRepository
+		 * @return \Illuminate\Http\RedirectResponse
+		 */
+    public function store(Request $request, PostRepository $postRepository)
     {
-        $post = Post::create($request->all());
-        if ($post) {
-            return redirect(route('posts.index'))->with('success', "L'article a bien été ajouté");
+				$post = $postRepository->save($request->all());
+				if ($post) {
+						$image = $request->file('image');
+						$image->storeAs('posts', $post->getImageName($image));
+						return redirect(route('posts.index'))->with('success', "L'article a bien été ajouté");
         }
         return redirect()->back();
     }

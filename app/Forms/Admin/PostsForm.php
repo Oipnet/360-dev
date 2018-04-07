@@ -18,7 +18,7 @@ class PostsForm extends AdminForm
         $this
             ->add('name', 'text')
             ->add('slug', 'text')
-            ->add('image', 'text')
+            ->add('image', 'image')
             ->add('content', 'textarea', ['attr' => ['id' => 'mdeditor']])
             ->add('online', 'checkbox')
             ->add('user_id', 'hidden', ['value' => Auth::user()->id]);
