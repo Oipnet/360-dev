@@ -52,9 +52,29 @@ class PostImageObserver
 	/**
 	 * @param Post $post
 	 */
-	public function deleted(Post $post)
+	public function deleting(Post $post)
 	{
+		if ($post->image) {
+			$this->deleteFile($post);
+			foreach ($this->sizes as $type => [$width, $height]) {
+				$this->deleteFile($post, $type);
+			}
+		}
+	}
 
+	/**
+	 * @param Post $post
+	 * @param null|string $type
+	 */
+	private function deleteFile(Post $post, ?string $type = null): void
+	{
+		$fileName = $type
+			? $post->id . '-' . $type . '.' . pathinfo($post->image, PATHINFO_EXTENSION)
+			: $post->image;
+		$image = new UploadedFile(public_path('posts') . '/' . $fileName, $fileName);
+		if ($image->isFile()) {
+			unlink($image->path());
+		}
 	}
 
 	/**
@@ -66,9 +86,9 @@ class PostImageObserver
 		$image       = $post->image;
 		$post->image = $post->getImageName($image);
 		$post->newQuery()->update(['image' => $post->image]);
-		foreach ($this->sizes as $type => $sizes) {
+		foreach ($this->sizes as $type => [$width, $height]) {
 			$this->imageManager->make($image)
-				->fit($sizes[0], $sizes[1] ?? null)
+				->fit($width, $height)
 				->save(public_path('posts') . '/' . $post->getImageName($image, $type));
 		}
 	}
