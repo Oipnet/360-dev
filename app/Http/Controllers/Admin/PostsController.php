@@ -47,22 +47,25 @@ class PostsController extends Controller
      * @param null $model
      * @return \Kris\LaravelFormBuilder\Form
      */
-    private function getForm(FormBuilder $formBuilder, string $url, string $method = Method::POST, $model = null)
-    {
+    private function getForm(
+    	FormBuilder $formBuilder, string $url, string $method = Method::POST, $model = null
+		) {
         return $formBuilder->create(PostsForm::class, compact('method', 'url', 'model'));
     }
 
-		/**
-		 * @param Request $request
-		 * @param PostRepository $postRepository
-		 * @return \Illuminate\Http\RedirectResponse
-		 */
+	/**
+	 * @param Request $request
+	 * @param PostRepository $postRepository
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
     public function store(Request $request, PostRepository $postRepository)
     {
-				$post = $postRepository->save($request->all());
+				$post = $postRepository->save($this->getData($request));
 				if ($post) {
-						$image = $request->file('image');
-						$image->storeAs('posts', $post->getImageName($image));
+						if ($request->hasFile('image_file')) {
+							$imageFile   = $request->file('image_file');
+							$imageFile->move('posts', $post->getImageName($imageFile));
+						}
 						return redirect(route('posts.index'))->with('success', "L'article a bien été ajouté");
         }
         return redirect()->back();
@@ -85,23 +88,29 @@ class PostsController extends Controller
         return response()->view('admin.posts.edit', compact('post', 'form'));
     }
 
-    /**
-     * @param Request $request
-     * @param Post $post
-     * @return View
-     */
+	/**
+	 * @param Request $request
+	 * @param Post $post
+	 * @param ImageService $imageService
+	 * @return View
+	 */
     public function update(Request $request, Post $post)
     {
-        if ($post->update($request->all())) {
-            return redirect(route('posts.index'))->with('success', "L'article a bien été édité");
-        }
-        return redirect()->back();
+			if ($post->update($this->getData($request))) {
+				if ($request->hasFile('image_file')) {
+					$imageFile = $request->file('image_file');
+					$imageFile->move('posts', $post->getImageName($imageFile));
+				}
+				return redirect(route('posts.index'))->with('success', "L'article a bien été édité");
+			}
+			return redirect()->back();
     }
 
-    /**
-     * @param Post $post
-     * @return RedirectResponse
-     */
+	/**
+	 * @param Post $post
+	 * @return RedirectResponse
+	 * @throws \Exception
+	 */
     public function destroy(Post $post): RedirectResponse
     {
         if ($post->delete()) {
@@ -109,4 +118,13 @@ class PostsController extends Controller
         }
         return redirect(route('posts.index'))->with('error', "L'article n'a pas pu être supprimé.");
     }
+
+	/**
+	 * @param Request $request
+	 * @return array
+	 */
+    private function getData(Request $request): array
+		{
+			return array_merge($request->all(), ['image' => $request->file('image_file') ?? null]);
+		}
 }

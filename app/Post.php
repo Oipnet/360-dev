@@ -68,12 +68,29 @@ class Post extends Model
         return Markdown::defaultTransform($this->content);
     }
 
-		/**
-		 * @param UploadedFile $image
-		 * @return string
-		 */
-    public function getImageName(UploadedFile $image): string
+	/**
+	 * @param UploadedFile $image
+	 * @param null|string $type
+	 * @return string
+	 */
+    public function getImageName(UploadedFile $image, ?string $type = null): string
 		{
-				return $this->id . '.' . $image->clientExtension();
+			$type = $type ? '-' . $type : '';
+			return $this->id . $type . '.' . $image->clientExtension();
+		}
+
+	/**
+	 * @param null|string $type
+	 * @return string Return the image with the full path (/../public/posts/1.png)
+	 */
+		public function getImage(?string $type = null): ?string
+		{
+			if ($this->image) {
+				$fileName = $type
+					? $this->id . '-' . $type . '.' . pathinfo($this->image, PATHINFO_EXTENSION)
+					: $this->image;
+				return '/posts/' . $fileName;
+			}
+			return null;
 		}
 }

@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         \Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         \App\Providers\ObserverServiceProvider::class,
+				\Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -230,7 +231,8 @@ return [
 
         // Project aliases
         'Menu'       => \App\Helpers\MenuHelper::class,
-        'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+				'image'      => \Intervention\Image\Facades\Image::class,
     ],
 
 ];
