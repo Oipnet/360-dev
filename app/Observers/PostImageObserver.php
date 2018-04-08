@@ -15,6 +15,7 @@ class PostImageObserver
 		'thumb' => [175, null],
 		'crop'  => [825, 175],
 	];
+
 	/**
 	 * @var ImageManager
 	 */
