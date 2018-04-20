@@ -82,13 +82,14 @@ class PostsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     */
-    public function edit(int $id): Response
+		/**
+		 * @param int $id
+		 * @param PostRepository $postRepository
+		 * @return Response
+		 */
+    public function edit(int $id, PostRepository $postRepository): Response
     {
-        $post = Post::findOrFail($id);
+        $post = $postRepository->getFirst($id);
         $form = $this->getForm($post);
         return response()->view('admin.posts.edit', compact('post', 'form'));
     }

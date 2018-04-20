@@ -38,4 +38,13 @@ class PostRepository
 				return $this->post->newQuery()->orderBy('created_at', 'desc')->get();
 		}
 
+		/**
+		 * @param int $id
+		 * @return Model|Post
+		 */
+		public function getFirst(int $id): Model
+		{
+				return $this->post->newQuery()->findOrFail($id);
+		}
+
 }
