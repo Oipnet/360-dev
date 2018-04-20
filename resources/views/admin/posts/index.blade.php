@@ -25,7 +25,7 @@
                         <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}">{{ $post->name }}</a></td>
                         <td>{{ $post->slug }}</td>
                         <td>{{ $post->user->name }}</td>
-                        <td>{{ $post->online }}</td>
+                        <td>{{ $post->getOnlineToString() }}</td>
                         <td>
                             <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn waves-effect waves-light">
                                 <i class="material-icons">mode_edit</i> Editer

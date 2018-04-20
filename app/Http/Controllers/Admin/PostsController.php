@@ -3,13 +3,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\Admin\PostsForm;
 use App\Http\Controllers\Controller;
-use App\Http\Tools\Method;
 use App\Post;
 use App\Repository\PostRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 /**
@@ -19,6 +19,22 @@ use Kris\LaravelFormBuilder\FormBuilder;
  */
 class PostsController extends Controller
 {
+
+
+		/**
+		 * @var FormBuilder
+		 */
+		private $formBuilder;
+
+		/**
+		 * PostsController constructor
+		 *
+		 * @param FormBuilder $formBuilder
+		 */
+		public function __construct(FormBuilder $formBuilder)
+		{
+				$this->formBuilder = $formBuilder;
+		}
 
 		/**
 		 * @param PostRepository $postRepository
@@ -31,26 +47,21 @@ class PostsController extends Controller
     }
 
     /**
-     * @param FormBuilder $formBuilder
      * @return Response
      */
-    public function create(FormBuilder $formBuilder): Response
+    public function create(): Response
     {
-        $form = $this->getForm($formBuilder, route('posts.store'));
+        $form = $this->getForm();
         return response()->view('admin.posts.create', compact('form'));
     }
 
-    /**
-     * @param FormBuilder $formBuilder
-     * @param string $url
-     * @param string $method
-     * @param null $model
-     * @return \Kris\LaravelFormBuilder\Form
-     */
-    private function getForm(
-    	FormBuilder $formBuilder, string $url, string $method = Method::POST, $model = null
-		) {
-        return $formBuilder->create(PostsForm::class, compact('method', 'url', 'model'));
+		/**
+		 * @param Post|null $post
+		 * @return Form
+		 */
+    private function getForm(?Post $post = null): Form {
+    		$post = $post ?: new Post();
+        return $this->formBuilder->create(PostsForm::class, ['model' => $post]);
     }
 
 	/**
@@ -73,25 +84,18 @@ class PostsController extends Controller
 
     /**
      * @param int $id
-     * @param FormBuilder $formBuilder
      * @return Response
      */
-    public function edit(int $id, FormBuilder $formBuilder): Response
+    public function edit(int $id): Response
     {
         $post = Post::findOrFail($id);
-        $form = $this->getForm(
-            $formBuilder,
-            route('posts.update', $post),
-            Method::PUT,
-            $post
-        );
+        $form = $this->getForm($post);
         return response()->view('admin.posts.edit', compact('post', 'form'));
     }
 
 	/**
 	 * @param Request $request
 	 * @param Post $post
-	 * @param ImageService $imageService
 	 * @return View
 	 */
     public function update(Request $request, Post $post)

@@ -55,12 +55,11 @@ class Post extends Model
     }
 
     /**
-     * @param $online bool
      * @return string
      */
-    public function getOnlineAttribute(bool $online): string
+    public function getOnlineToString(): string
     {
-        return $online ? 'Oui' : 'Non';
+        return $this->getAttribute('online') ? 'Oui' : 'Non';
     }
 
     public function getHtmlAttribute()

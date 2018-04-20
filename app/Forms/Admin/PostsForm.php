@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class PostsForm extends AdminForm
 {
+		/**
+		 * @return mixed|void
+		 */
     public function buildForm()
     {
         // Classic input
@@ -28,12 +31,12 @@ class PostsForm extends AdminForm
         $this->addBefore('image', 'category_id', 'entity', [
             'class'       => Category::class,
             'property'    => 'name',
-            'empty_value' => '== Select categorie ==',
+            'empty_value' => '== Sélectionnez une catégorie ==',
             'label_show'  => false,
-            'attr'        => ['class' => 'browser-default']
+            'attr'        => ['class' => 'browser-default'],
+						'rules'       => 'required'
         ]);
+				parent::buildForm();
 
-        // Button
-        $this->addButton();
-    }
+		}
 }
