@@ -12,8 +12,8 @@ class PostImageObserver
 	 * @var array
 	 */
 	private $sizes = [
-		'thumb' => [175, null],
-		'crop'  => [825, 175],
+		'thumb' => [750, 300],
+		'crop'  => [900, 300],
 	];
 
 	/**

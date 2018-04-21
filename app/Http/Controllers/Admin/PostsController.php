@@ -74,7 +74,7 @@ class PostsController extends Controller
 				$post = $postRepository->save($this->getData($request));
 				if ($post) {
 						if ($request->hasFile('image_file')) {
-							$imageFile   = $request->file('image_file');
+							$imageFile = $request->file('image_file');
 							$imageFile->move('posts', $post->getImageName($imageFile));
 						}
 						return redirect(route('posts.index'))->with('success', "L'article a bien été ajouté");
