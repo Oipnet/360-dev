@@ -20,12 +20,11 @@
             <h5 class="card-header">Categories</h5>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <ul class="list-unstyled mb-0">
                             @foreach($categories as $category)
-                                <li>
-                                    <a
-                                        href="{{ route('blog.category', ['slug' => $category->slug]) }}"
+                                <li class="mb-2">
+                                    <a href="{{ route('blog.category', ['slug' => $category->slug]) }}"
                                         class="list-group-item {{ request()->getUri() === route('blog.category', ['slug' => $category->slug]) ? 'active' : ''}} list-group-item-action">
                                         {{ $category->name }}
                                         <span class="badge badge-primary float-right">{{ $category->posts_count }}</span>
