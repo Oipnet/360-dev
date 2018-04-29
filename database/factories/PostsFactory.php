@@ -19,7 +19,7 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'name'    => $faker->name,
         'slug'    => $faker->slug,
         'content' => $faker->text(1000),
-        'image'   => $faker->imageUrl(),
+        'image'   => $faker->image(dirname(__DIR__) . '/public/posts'),
         'online'  => true,
         'category_id' => function () {
             return factory(\App\Category::class)->create()->id;

@@ -2,10 +2,13 @@
 
 namespace App;
 
-use App\Concern\HasSlug;
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * App Category
+ */
 class Category extends Model
 {
     use HasSlug;

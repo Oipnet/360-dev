@@ -4,21 +4,22 @@ namespace App\Repository;
 use App\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App PostRepository
  */
-class PostRepository
+class PostRepository extends Repository
 {
 
 		/**
 		 * @var Post
 		 */
-		private $post;
+		protected $model;
 
 		public function __construct(Post $post)
 		{
-				$this->post = $post;
+				$this->model = $post;
 		}
 
 		/**
@@ -27,7 +28,7 @@ class PostRepository
 		 */
 		public function save(array $data): Model
 		{
-				return $this->post->newQuery()->create($data);
+				return $this->model->newQuery()->create($data);
 		}
 
 		/**
@@ -35,7 +36,7 @@ class PostRepository
 		 */
 		public function getByOrderDesc(): Collection
 		{
-				return $this->post->newQuery()->orderBy('created_at', 'desc')->get();
+				return $this->model->newQuery()->orderBy('created_at', 'desc')->get();
 		}
 
 		/**
@@ -44,7 +45,31 @@ class PostRepository
 		 */
 		public function getFirst(int $id): Model
 		{
-				return $this->post->newQuery()->findOrFail($id);
+				return $this->model->newQuery()->findOrFail($id);
+		}
+
+		/**
+		 * @param array $data
+		 * @return int
+		 */
+		public function update(array $data)
+		{
+				return $this->model->newQuery()->update($data);
+		}
+
+		/**
+		 * @param int|null $categoryId
+		 * @return Builder
+		 */
+		public function findIsOnline(?int $categoryId = null)
+		{
+				$resultQuery = $this->model->newQuery()->with('category', 'user')
+					->where('online', true)
+					->orderBy('created_at', 'desc');
+				if ($categoryId) {
+						return $resultQuery->where('category_id', $categoryId);
+				}
+				return $resultQuery;
 		}
 
 }

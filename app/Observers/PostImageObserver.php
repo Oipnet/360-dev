@@ -2,6 +2,7 @@
 namespace App\Observers;
 
 use App\Post;
+ use App\Repository\PostRepository;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManager;
 
@@ -16,18 +17,26 @@ class PostImageObserver
 		'crop'  => [900, 300],
 	];
 
-	/**
-	 * @var ImageManager
-	 */
-	private $imageManager;
+		/**
+		 * @var ImageManager
+		 */
+		private $imageManager;
 
-	/**
-	 * PostImageObserver constructor.
-	 * @param ImageManager $imageManager
-	 */
-	public function __construct(ImageManager $imageManager)
+		/**
+		 * @var PostRepository
+		 */
+		private $postRepository;
+
+		/**
+		 * PostImageObserver constructor
+		 *
+		 * @param ImageManager $imageManager
+		 * @param PostRepository $postRepository
+		 */
+	public function __construct(ImageManager $imageManager, PostRepository $postRepository)
 	{
-		$this->imageManager = $imageManager;
+			$this->imageManager   = $imageManager;
+			$this->postRepository = $postRepository;
 	}
 
 	/**
@@ -86,7 +95,7 @@ class PostImageObserver
 		/** @var $image UploadedFile */
 		$image       = $post->image;
 		$post->image = $post->getImageName($image);
-		$post->newQuery()->update(['image' => $post->image]);
+		$this->postRepository->update(['image' => $post->image]);
 		foreach ($this->sizes as $type => [$width, $height]) {
 			$this->imageManager->make($image)
 				->fit($width, $height)

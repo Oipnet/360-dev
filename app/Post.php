@@ -2,8 +2,7 @@
 
 namespace App;
 
-use App\Concern\HasSlug;
-use App\Concern\Repository\PostRepository;
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\UploadedFile;
@@ -15,7 +14,6 @@ use Michelf\Markdown;
  */
 class Post extends Model
 {
-    use PostRepository;
     use HasSlug;
 
     protected $fillable = ['name', 'slug', 'image', 'content', 'category_id', 'user_id', 'online'];
@@ -64,18 +62,21 @@ class Post extends Model
 
     public function getHtmlAttribute()
     {
-        return Markdown::defaultTransform($this->content);
+        return Markdown::defaultTransform($this->getAttribute('content'));
     }
 
 	/**
-	 * @param UploadedFile $image
+	 * @param UploadedFile|string $image
 	 * @param null|string $type
 	 * @return string
 	 */
-    public function getImageName(UploadedFile $image, ?string $type = null): string
+    public function getImageName($image, ?string $type = null): string
 		{
-			$type = $type ? '-' . $type : '';
-			return $this->id . $type . '.' . $image->clientExtension();
+				if (is_string($image)) {
+						return $image;
+				}
+				$type = $type ? '-' . $type : '';
+				return $this->id . $type . '.' . $image->clientExtension();
 		}
 
 	/**
