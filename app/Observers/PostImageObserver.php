@@ -44,7 +44,7 @@ class PostImageObserver
 	 */
 	public function created(Post $post): void
 	{
-		if ($post->image) {
+			if ($post->image) {
 			$this->upload($post);
 		}
 	}
@@ -54,7 +54,7 @@ class PostImageObserver
 	 */
 	public function updated(Post $post)
 	{
-		if ($post->image) {
+			if ($post->image) {
 			$this->upload($post);
 		}
 	}

@@ -17,7 +17,8 @@ class PostsForm extends AdminForm
 		 */
     public function buildForm()
     {
-        // Classic input
+				parent::buildForm();
+				// Classic input
         $this
             ->add('name', 'text')
             ->add('slug', 'text')
@@ -36,7 +37,9 @@ class PostsForm extends AdminForm
             'attr'        => ['class' => 'browser-default'],
 						'rules'       => 'required'
         ]);
-				parent::buildForm();
-
+				$this->add('submit', 'submit', [
+					'label' => $this->label,
+					'attr'  => ['class' => 'btn btn waves-effect waves-light']
+				]);
 		}
 }

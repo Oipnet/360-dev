@@ -61,7 +61,7 @@ class PostsController extends Controller
 		 */
     private function getForm(?Post $post = null): Form {
     		$post = $post ?: new Post();
-        return $this->formBuilder->create(PostsForm::class, ['model' => $post]);
+        return $this->formBuilder->create(PostsForm::class, ['model' => $post, 'file' => true]);
     }
 
 	/**
@@ -101,8 +101,8 @@ class PostsController extends Controller
 	 */
     public function update(Request $request, Post $post)
     {
-			if ($post->update($this->getData($request))) {
-				if ($request->hasFile('image_file')) {
+				if ($post->update($this->getData($request))) {
+					if ($request->hasFile('image_file')) {
 					$imageFile = $request->file('image_file');
 					$imageFile->move('posts', $post->getImageName($imageFile));
 				}
