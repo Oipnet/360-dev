@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Favorite\Favorite;
+use App\Favorite\HasFavorites;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Michelf\Markdown;
 
@@ -15,6 +18,7 @@ use Michelf\Markdown;
 class Post extends Model
 {
     use HasSlug;
+
 
     protected $fillable = ['name', 'slug', 'image', 'content', 'category_id', 'user_id', 'online'];
 
@@ -71,26 +75,38 @@ class Post extends Model
 	 * @return string
 	 */
     public function getImageName($image, ?string $type = null): string
-		{
-				if (is_string($image)) {
-						return $image;
-				}
-				$type = $type ? '-' . $type : '';
-				return $this->id . $type . '.' . $image->clientExtension();
+	{
+		if (is_string($image)) {
+			return $image;
 		}
+		$type = $type ? '-' . $type : '';
+		return $this->id . $type . '.' . $image->clientExtension();
+	}
 
 	/**
 	 * @param null|string $type
 	 * @return string Return the image with the full path (/../public/posts/1.png)
 	 */
-		public function getImage(?string $type = null): ?string
-		{
-			if ($this->image) {
-				$fileName = $type
-					? $this->id . '-' . $type . '.' . pathinfo($this->image, PATHINFO_EXTENSION)
-					: $this->image;
-				return '/posts/' . $fileName;
-			}
-			return null;
+	public function getImage(?string $type = null): ?string
+	{
+		if ($this->image) {
+			$fileName = $type
+				? $this->id . '-' . $type . '.' . pathinfo($this->image, PATHINFO_EXTENSION)
+				: $this->image;
+			return '/posts/' . $fileName;
 		}
+		return null;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function favorited(): bool
+	{
+		return (bool)
+			Favorite::where('user_id', Auth::id())
+				->where('post_id', $this->id)
+				->first();
+	}
 }

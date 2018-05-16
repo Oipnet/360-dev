@@ -9,18 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Repository
 {
 
-		/**
-		 * @var Model
-		 */
-		protected $model;
+	/**
+	 * @var Model
+	 */
+	protected $model;
 
-		/**
-		 * @param string $slug
-		 * @return \Illuminate\Database\Eloquent\Collection|Model
-		 */
-		public function getBySlug(string $slug)
-		{
-				return $this->model->newQuery()->where('slug', $slug)->firstOrFail();
-		}
+	/**
+	 * @param string $slug
+	 * @return \Illuminate\Database\Eloquent\Collection|Model
+	 */
+	public function getBySlug(string $slug)
+	{
+		return $this->model->newQuery()->where('slug', $slug)->firstOrFail();
+	}
 
 }

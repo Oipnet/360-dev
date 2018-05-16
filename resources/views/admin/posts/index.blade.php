@@ -19,7 +19,7 @@
                 </thead>
 
                 <tbody>
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
                         <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}">{{ $post->name }}</a></td>
@@ -37,7 +37,9 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr><td>Aucun article de créé pour le moment</td></tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

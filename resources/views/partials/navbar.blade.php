@@ -19,7 +19,14 @@
             <ul class="navbar-nav my-2 my-lg-0">
                 @if (Route::has('login'))
                     @auth
-                        <li class="nav-item"><a href="" class="nav-link">{{ auth()->user()->name }}</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.favorites') }}">Mes favoris</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <form action="{{ route('logout') }}" class="form-inline" method="post">
                                 {{ csrf_field() }}

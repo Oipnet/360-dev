@@ -14,6 +14,9 @@
             Créé le <em>{{ $post->getCreatedAt() }}</em> by
             <a href="#"><strong>{{ $post->user->name }}</strong></a>
             | {{ $post->category->name }}
+            @if (Auth::check())
+                | <favorite :post={{ $post->id }} :favorited={{ $post->favorited() ? 'true' : 'false' }}></favorite>
+            @endif
         </div>
     </div>
 

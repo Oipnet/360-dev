@@ -16,6 +16,10 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::resource('blog', 'PostsController');
 Route::get('blog/categorie/{slug}', 'PostsController@category')->name('blog.category');
 
+Route::post('favorite/{post}', 'PostsController@favoritePost');
+Route::post('unfavorite/{post}', 'PostsController@unFavoritePost');
+Route::get('/compte/favorites', 'UsersController@myFavorites')->name('user.favorites')->middleware('auth');
+
 // Admin Dashboard
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('/', 'DashboardController@index')->name('admin.index');

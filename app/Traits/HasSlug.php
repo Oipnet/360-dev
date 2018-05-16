@@ -13,7 +13,7 @@ trait HasSlug
     /**
      * @param null|string $slug
      */
-    public function setSlugAttribute(?string $slug): void
+    public function setSlugAttribute(?string $slug = null): void
     {
         $attributeName = 'slug';
         /** @var $this Model */

@@ -2,8 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
+use Illuminate\Auth\AuthManager;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 /**
@@ -14,27 +18,27 @@ use Illuminate\View\View;
 class PostsController extends Controller
 {
 
-		/**
-		 * @var CategoryRepository
-		 */
-		private $categoryRepository;
+	/**
+	 * @var CategoryRepository
+	 */
+	private $categoryRepository;
 
-		/**
-		 * @var PostRepository
-		 */
-		private $postRepository;
+	/**
+	 * @var PostRepository
+	 */
+	private $postRepository;
 
-		/**
-		 * PostsController constructor
-		 *
-		 * @param CategoryRepository $categoryRepository
-		 * @param PostRepository $postRepository
-		 */
-		public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository)
-		{
-				$this->categoryRepository = $categoryRepository;
-				$this->postRepository     = $postRepository;
-		}
+	/**
+	 * PostsController constructor
+	 *
+	 * @param CategoryRepository $categoryRepository
+	 * @param PostRepository $postRepository
+	 */
+	public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository)
+	{
+		$this->categoryRepository = $categoryRepository;
+		$this->postRepository     = $postRepository;
+	}
 
 		/**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -68,4 +72,26 @@ class PostsController extends Controller
         $categories = Category::all();
         return view('posts.category', compact('posts', 'category', 'categories'));
     }
+
+	/**
+	 * @param Post $post
+	 * @param AuthManager $auth
+	 * @return RedirectResponse
+	 */
+    public function favoritePost(Post $post, AuthManager $auth): RedirectResponse
+	{
+		Auth::user()->favorites()->attach($post->id);
+		return back();
+	}
+
+	/**
+	 * @param Post $post
+	 * @param AuthManager $auth
+	 * @return RedirectResponse
+	 */
+    public function unFavoritePost(Post $post, AuthManager $auth): RedirectResponse
+	{
+		$auth->user()->favorites()->detach($post->id);
+		return back();
+	}
 }

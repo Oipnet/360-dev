@@ -15,17 +15,16 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Post::class, function (Faker $faker) {
 
+	$user     = \App\User::inRandomOrder()->first();
+	$category = \App\Category::inRandomOrder()->first();
+
     return [
-        'name'    => $faker->name,
-        'slug'    => $faker->slug,
-        'content' => $faker->text(1000),
-        'image'   => $faker->image(public_path('posts')),
-        'online'  => true,
-        'category_id' => function () {
-            return factory(\App\Category::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(\App\User::class)->create()->id;
-        }
+        'name'        => $faker->name,
+        'slug'        => $faker->slug,
+        'content'     => $faker->text(1000),
+        'image'       => $faker->image(public_path('posts')),
+        'online'      => false,
+        'category_id' => $category,
+        'user_id'     => $user->id
     ];
 });

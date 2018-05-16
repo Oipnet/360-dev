@@ -59,10 +59,11 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @param User $user
-     * @return RedirectResponse
-     */
+	/**
+	 * @param User $user
+	 * @return RedirectResponse
+	 * @throws \Exception
+	 */
     public function destroy(User $user): RedirectResponse
     {
         if ($user->delete()) {
@@ -70,4 +71,9 @@ class UserController extends Controller
         }
         return redirect(route('users.index'))->with('error', "L'utilisateur n'a pas pu être supprimé.");
     }
+
+    public function myFavorites()
+	{
+
+	}
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Favorite\HasFavorites;
 use App\User\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+	use HasFavorites;
+	use Notifiable;
 
     /**
      * The attributes that are mass assignable.
