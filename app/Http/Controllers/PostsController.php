@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Comments;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -29,15 +31,22 @@ class PostsController extends Controller
 	private $postRepository;
 
 	/**
+	 * @var commentRepository
+	 */
+	private $commentRepository;
+
+	/**
 	 * PostsController constructor
 	 *
 	 * @param CategoryRepository $categoryRepository
 	 * @param PostRepository $postRepository
+	 * @param CommentRepository $commentRepository
 	 */
-	public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository)
+	public function __construct(CategoryRepository $categoryRepository, PostRepository $postRepository, CommentRepository $commentRepository )
 	{
 		$this->categoryRepository = $categoryRepository;
 		$this->postRepository     = $postRepository;
+		$this->commentRepository  = $commentRepository;
 	}
 
 		/**
@@ -46,7 +55,7 @@ class PostsController extends Controller
     public function index(): View
     {
         $posts      = $this->postRepository->findIsOnline()->paginate(config('app.post_per_page'));
-        $categories = Category::all();
+		$categories = Category::all();
         return view('posts.index', compact('posts', 'categories'));
     }
 
@@ -57,8 +66,9 @@ class PostsController extends Controller
     public function show(string $slug): View
     {
         $post       = $this->postRepository->getBySlug($slug);
-        $categories = Category::all();
-        return view('posts.view', compact('post', 'categories'));
+		$categories = Category::all();
+		$comments   = $this->commentRepository->getAllByPost($post->id)->paginate(config('app.comment_per_page'));
+        return view('posts.view', compact('post', 'categories', 'comments'));
     }
 
     /**

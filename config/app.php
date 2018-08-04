@@ -125,7 +125,9 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-		'post_per_page' => 15,
+    'post_per_page' => 15,
+    
+    'comment_per_page' => 8,
 
     /*
     |--------------------------------------------------------------------------
