@@ -4,7 +4,6 @@ namespace App\Repository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreComment;
 use App\Comment;
 
 /**
@@ -59,6 +58,6 @@ class CommentRepository extends Repository
      */
     public function delete(Request $request)
     {
-        return Comment::find($request->comment_id)->delete();
+        Comment::find($request->comment_id)->delete();
     }
 }
