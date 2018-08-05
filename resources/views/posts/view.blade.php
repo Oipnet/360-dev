@@ -27,8 +27,8 @@
             <p>{!! nl2br($post->html) !!}</p>
             <hr>
 
+            <!-- Comments Form -->
             @if(!Auth::guest())
-                <!-- Comments Form -->
                 <div class="card my-4">
                     <h5 class="card-header">Ajouter un commentaire</h5>
                     <div class="card-body" id="comment">
@@ -46,18 +46,8 @@
                 <p>Vous devez être inscrit afin poster un commentaire - <a href="{{ route('register') }}">Créer un compte</a></p>
             @endif
 
-            @foreach($comments as $comment)
-                <!-- Single Comment -->
-                <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                    <div class="media-body">
-                        <em>{{ $comment->created_at->format('d/m/Y') }}</em>
-                        <h5 class="mt-0"><a href="#">{{ $comment->user->name }}</a></h5>
-                        {{ $comment->content }}
-                    </div>
-       
-                </div>
-            @endforeach
+            <!-- Comments List -->
+            @include('partials/comments')
 
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">

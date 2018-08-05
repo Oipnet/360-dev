@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Http\Requests\StoreComment;
@@ -33,8 +34,8 @@ class CommentsController extends Controller
     public function __construct(CommentRepository $commentRepository, PostRepository $postRepository)
     {
         $this->commentRepository = $commentRepository;
-        $this->postRepository    =  $postRepository;
-        $this->urlRedirect = url()->current() . "#comment";
+        $this->postRepository    = $postRepository;
+        $this->urlRedirect       = url()->current() . "#comment";
     }
 
     /**
@@ -43,7 +44,7 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreComment $request)
+    public function store(StoreComment $request) : RedirectResponse
     {
         $postId = $this->postRepository->getFirst($request->post_id);
 
@@ -57,37 +58,19 @@ class CommentsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreComment $request) : RedirectResponse
     {
-        //
+        $this->authorize('update', Comment::find($request->comment_id));
+
+        $this->commentRepository->update($request);
+
+        return redirect($this->urlRedirect);
     }
 
     /**
@@ -96,8 +79,12 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request) : RedirectResponse
     {
-        //
+        $this->authorize('delete', Comment::find($request->comment_id));
+
+        $this->commentRepository->delete($request);
+
+        return redirect($this->urlRedirect);
     }
 }

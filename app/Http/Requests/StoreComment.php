@@ -24,7 +24,7 @@ class StoreComment extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'min:2|max:255',
+            'content' => 'min:2|max:255|required',
         ];
     }
 }
