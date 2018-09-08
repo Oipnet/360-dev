@@ -1,9 +1,7 @@
 <?php
 namespace App\Repository;
 
-use App\Favorite\Favorite;
-use App\Post;
-use Illuminate\Auth\AuthManager;
+use App\Model\Post;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
@@ -21,7 +19,7 @@ class PostRepository extends Repository
 
 	public function __construct(Post $post)
 	{
-		$this->model    = $post;
+		$this->model = $post;
 	}
 
 	/**

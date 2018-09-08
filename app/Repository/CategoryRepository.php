@@ -1,7 +1,7 @@
 <?php
 namespace App\Repository;
 
-use App\Category;
+use App\Model\Category;
 
 /**
  * App CategoryRepository

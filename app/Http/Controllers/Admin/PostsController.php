@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Forms\Admin\PostsForm;
 use App\Http\Controllers\Controller;
-use App\Post;
+use App\Model\Post;
 use App\Repository\PostRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;

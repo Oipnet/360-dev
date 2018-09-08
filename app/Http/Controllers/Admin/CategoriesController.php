@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Model\Category;
 use App\Http\Tools\Method;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

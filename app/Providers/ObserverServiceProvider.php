@@ -3,7 +3,7 @@ namespace App\Providers;
 
 use App\Observers\PostImageObserver;
 use App\Observers\PostsCountObserver;
-use App\Post;
+use App\Model\Post;
 use Illuminate\Support\ServiceProvider;
 
 /**

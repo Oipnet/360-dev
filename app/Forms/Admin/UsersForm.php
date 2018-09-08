@@ -1,7 +1,7 @@
 <?php
 namespace App\Forms\Admin;
 
-use App\User\Role;
+use App\Model\User\Role;
 
 /**
  * Class UsersForm

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Forms\Admin\UsersForm;
 use App\Http\Controllers\Controller;
 use App\Http\Tools\Method;
-use App\User;
+use App\Model\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

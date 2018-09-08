@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Feature;
 
-use App\User;
+use App\Model\User;
 
 class UsersTest extends TestWithDbCase
 {

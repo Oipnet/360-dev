@@ -2,7 +2,7 @@
 
 namespace App\Forms\Admin;
 
-use App\Category;
+use App\Model\Category;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -17,8 +17,8 @@ class PostsForm extends AdminForm
 		 */
     public function buildForm()
     {
-				parent::buildForm();
-				// Classic input
+		parent::buildForm();
+		// Classic input
         $this
             ->add('name', 'text')
             ->add('slug', 'text')

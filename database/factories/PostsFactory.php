@@ -13,10 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Model\Post::class, function (Faker $faker) {
 
-	$user     = \App\User::inRandomOrder()->first();
-	$category = \App\Category::inRandomOrder()->first();
+	$user     = \App\Model\User::inRandomOrder()->first();
+	$category = \App\Model\Category::inRandomOrder()->first();
 
     return [
         'name'        => $faker->name,

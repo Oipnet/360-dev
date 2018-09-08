@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Feature;
 
-use App\Post;
+use App\Model\Post;
 
 class PostsTest extends TestWithDbCase
 {

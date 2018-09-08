@@ -2,7 +2,6 @@
 
 namespace App\Favorite;
 
-use App\Post;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -20,12 +19,12 @@ trait HasFavorites
 	}
 
     /**
-     * @return string the model (ex: post_id => App\Post)
+     * @return string the model (ex: post_id => App\Model\Post)
      */
 	private function relatedPivotKeyToModel(): string
     {
         $pivotKey = $this->getKeys()[1];
-        return 'App\\' . ucfirst(str_replace('_id','', $pivotKey));
+        return 'App\\Model\\' . ucfirst(str_replace('_id','', $pivotKey));
     }
 
 	/**

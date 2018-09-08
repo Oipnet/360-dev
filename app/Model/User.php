@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use App\Favorite\HasFavorites;
 use App\User\Role;
