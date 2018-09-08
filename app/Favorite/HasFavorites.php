@@ -12,24 +12,30 @@ trait HasFavorites
 {
 
 	/**
-	 * @return string
+	 * @return string[]
 	 */
-	protected function getRelatedPivotKey(): string
+	protected function getKeys(): array
 	{
-		return 'post_id';
+		return ['user_id', 'post_id'];
 	}
+
+    /**
+     * @return string the model (ex: post_id => App\Post)
+     */
+	private function relatedPivotKeyToModel(): string
+    {
+        $pivotKey = $this->getKeys()[1];
+        return 'App\\' . ucfirst(str_replace('_id','', $pivotKey));
+    }
 
 	/**
 	 * @return BelongsToMany
 	 */
 	public function favorites(): BelongsToMany
 	{
-		$model           = get_called_class();
-		$modelParts      = explode('\\', $model);
-		$foreignPivotKey = strtolower(end($modelParts)) . '_id';
-
+	    list($foreignPivotKey, $relatedPivotKey) = $this->getKeys();
 		return $this
-			->belongsToMany(Post::class, 'favorites', $foreignPivotKey, $this->getRelatedPivotKey())
+			->belongsToMany($this->relatedPivotKeyToModel(), 'favorites', $foreignPivotKey, $relatedPivotKey)
 			->withTimeStamps();
 	}
 
