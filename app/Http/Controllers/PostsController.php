@@ -81,7 +81,7 @@ class PostsController extends Controller
     public function favoritePost(Post $post, AuthManager $auth): RedirectResponse
 	{
 		Auth::user()->favorites()->attach($post->id);
-		return back();
+		return back()->with('success', "L'article a bien été ajouté dans vos favoris");
 	}
 
 	/**

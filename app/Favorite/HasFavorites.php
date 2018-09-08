@@ -2,6 +2,7 @@
 
 namespace App\Favorite;
 
+use App\Post;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -28,7 +29,7 @@ trait HasFavorites
 		$foreignPivotKey = strtolower(end($modelParts)) . '_id';
 
 		return $this
-			->belongsToMany($model, 'favorites', $foreignPivotKey, $this->getRelatedPivotKey())
+			->belongsToMany(Post::class, 'favorites', $foreignPivotKey, $this->getRelatedPivotKey())
 			->withTimeStamps();
 	}
 

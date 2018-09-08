@@ -71,9 +71,4 @@ class UserController extends Controller
         }
         return redirect(route('users.index'))->with('error', "L'utilisateur n'a pas pu être supprimé.");
     }
-
-    public function myFavorites()
-	{
-
-	}
 }

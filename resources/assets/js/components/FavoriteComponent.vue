@@ -31,7 +31,10 @@
         methods: {
             favorite (post) {
                 axios.post('/favorite/' + post)
-                    .then(response => this.isFavorited = true)
+                    .then(response => {
+                        console.log(response)
+                        this.isFavorited = true
+                    })
                     .catch(response => console.log(response.data))
             },
 
