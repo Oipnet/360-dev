@@ -109,7 +109,7 @@ abstract class AdminController extends Controller
 	 */
 	protected function redirectToIndex(string $message): RedirectResponse
 	{
-		return redirect(route('roles.index'))->with('success', $message);
+		return redirect(route($this->routePrefix . '.index'))->with('success', $message);
 	}
 
 }
