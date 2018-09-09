@@ -234,7 +234,7 @@ return [
         // Project aliases
         'Menu'       => \App\Helpers\MenuHelper::class,
         'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-				'image'      => \Intervention\Image\Facades\Image::class,
+		'image'      => \Intervention\Image\Facades\Image::class,
     ],
 
 ];
