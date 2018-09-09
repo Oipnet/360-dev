@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -56,9 +57,7 @@ abstract class AdminController extends Controller
 	protected function renderWithForm(string $view): Response
 	{
 		$view = 'admin.' . $this->routePrefix . '.' . $view;
-		return response()->view($view, [
-			'form' => $this->getForm()
-		]);
+		return response()->view($view, ['form' => $this->getForm()]);
 	}
 
 	/**
@@ -84,7 +83,7 @@ abstract class AdminController extends Controller
 	{
 		$controllerParts = explode('\\', get_called_class());
 		$controller      = end($controllerParts);
-		$model           = 'App\\Model\\' . str_replace('Controller', '', $controller);
+		$model           = 'App\\Model\\' . Str::singular(str_replace('Controller', '', $controller));
 		if (!class_exists($model)) {
 			throw new \Exception("Model $model  does not exist");
 		}

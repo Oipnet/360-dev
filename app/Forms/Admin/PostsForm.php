@@ -44,5 +44,6 @@ class PostsForm extends AdminForm
 			'label' => $this->label,
 			'attr'  => ['class' => 'btn btn waves-effect waves-light']
 		]);
+		array_merge($this->formOptions, ['file' => true]);
 	}
 }

@@ -17,23 +17,12 @@ use Kris\LaravelFormBuilder\FormBuilder;
  *
  * Admin posts controller, manages the addition and editing of new articles
  */
-class PostsController extends Controller
+class PostsController extends AdminController
 {
 
-	/**
-	 * @var FormBuilder
-	 */
-	private $formBuilder;
+	protected $routePrefix = 'posts';
 
-	/**
-	 * PostsController constructor
-	 *
-	 * @param FormBuilder $formBuilder
-	 */
-	public function __construct(FormBuilder $formBuilder)
-	{
-		$this->formBuilder = $formBuilder;
-	}
+	protected $formClass = PostsForm::class;
 
 	/**
 	 * @param PostRepository $postRepository
@@ -45,14 +34,6 @@ class PostsController extends Controller
         return response()->view('admin.posts.index', compact('posts'));
     }
 
-    /**
-     * @return Response
-     */
-    public function create(): Response
-    {
-        $form = $this->getForm();
-        return response()->view('admin.posts.create', compact('form'));
-    }
 
 	/**
 	 * @param Request $request
@@ -72,11 +53,12 @@ class PostsController extends Controller
         return redirect()->back();
     }
 
-		/**
-		 * @param int $id
-		 * @param PostRepository $postRepository
-		 * @return Response
-		 */
+	/**
+	 * @param int $id
+	 * @param PostRepository $postRepository
+	 * @return Response
+	 * @throws \Exception
+	 */
     public function edit(int $id, PostRepository $postRepository): Response
     {
         $post = $postRepository->getFirst($id);
