@@ -49,9 +49,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = [
-            'name'  => $request->input('name'),
-            'email' => $request->input('email'),
-            'roles' => $request->input('roles')
+            'name'    => $request->input('name'),
+            'email'   => $request->input('email'),
+            'role_id' => $request->input('role_id')
         ];
         if ($user->update($data)) {
             return redirect(route('users.index'))->with('success', "L'utilisateur a bien été mis à jour");

@@ -1,7 +1,7 @@
 <?php
 namespace App\Forms\Admin;
 
-use App\Model\User\Role;
+use App\Model\Role;
 
 /**
  * Class UsersForm
@@ -9,17 +9,26 @@ use App\Model\User\Role;
 class UsersForm extends AdminForm
 {
 
+	protected $routePrefixName = 'users';
+
     public function buildForm()
     {
+    	parent::buildForm();
         $this
             ->add('name', 'text')
             ->add('email', 'text')
-            ->add('roles', 'select', [
-                'choices'     => [Role::ADMIN => 'Admin', Role::MEMBER => 'Membre'],
-                'empty_value' => '=== Select Role ===',
-                'label'       => false
-            ]);
+            ->add('role_id', 'entity', [
+            	'class'         => Role::class,
+				'property_name' => 'name',
+				'label_show'    => false,
+				'empty_value'   => '== Sélectionnez un role ==',
+				'attr'          => ['class' => 'browser-default'],
+				'rules'         => 'required'
+			]);
 
-        $this->addButton();
+		$this->add('submit', 'submit', [
+			'label' => 'Ajouter cet utilisateur',
+			'attr'  => ['class' => 'btn btn waves-effect waves-light']
+		]);
     }
 }

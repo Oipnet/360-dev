@@ -20,26 +20,25 @@ use Kris\LaravelFormBuilder\FormBuilder;
 class PostsController extends Controller
 {
 
+	/**
+	 * @var FormBuilder
+	 */
+	private $formBuilder;
 
-		/**
-		 * @var FormBuilder
-		 */
-		private $formBuilder;
+	/**
+	 * PostsController constructor
+	 *
+	 * @param FormBuilder $formBuilder
+	 */
+	public function __construct(FormBuilder $formBuilder)
+	{
+		$this->formBuilder = $formBuilder;
+	}
 
-		/**
-		 * PostsController constructor
-		 *
-		 * @param FormBuilder $formBuilder
-		 */
-		public function __construct(FormBuilder $formBuilder)
-		{
-				$this->formBuilder = $formBuilder;
-		}
-
-		/**
-		 * @param PostRepository $postRepository
-		 * @return Response
-		 */
+	/**
+	 * @param PostRepository $postRepository
+	 * @return Response
+	 */
     public function index(PostRepository $postRepository): Response
     {
         $posts = $postRepository->getByOrderDesc();
@@ -53,15 +52,6 @@ class PostsController extends Controller
     {
         $form = $this->getForm();
         return response()->view('admin.posts.create', compact('form'));
-    }
-
-		/**
-		 * @param Post|null $post
-		 * @return Form
-		 */
-    private function getForm(?Post $post = null): Form {
-    		$post = $post ?: new Post();
-        return $this->formBuilder->create(PostsForm::class, ['model' => $post, 'file' => true]);
     }
 
 	/**
@@ -101,14 +91,14 @@ class PostsController extends Controller
 	 */
     public function update(Request $request, Post $post)
     {
-				if ($post->update($this->getData($request))) {
-					if ($request->hasFile('image_file')) {
-					$imageFile = $request->file('image_file');
-					$imageFile->move('posts', $post->getImageName($imageFile));
-				}
-				return redirect(route('posts.index'))->with('success', "L'article a bien été édité");
+		if ($post->update($this->getData($request))) {
+			if ($request->hasFile('image_file')) {
+				$imageFile = $request->file('image_file');
+				$imageFile->move('posts', $post->getImageName($imageFile));
 			}
-			return redirect()->back();
+			return redirect(route('posts.index'))->with('success', "L'article a bien été édité");
+		}
+		return redirect()->back();
     }
 
 	/**
@@ -129,7 +119,7 @@ class PostsController extends Controller
 	 * @return array
 	 */
     private function getData(Request $request): array
-		{
-			return array_merge($request->all(), ['image' => $request->file('image_file') ?? null]);
-		}
+	{
+		return array_merge($request->all(), ['image' => $request->file('image_file') ?? null]);
+	}
 }

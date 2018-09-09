@@ -16,6 +16,11 @@ abstract class AdminForm extends Form
 	protected $label;
 
 	/**
+	 * @var string
+	 */
+	protected $routePrefixName;
+
+	/**
 	 * Default buildForm with crud configuration
 	 *
 	 * @return mixed|void
@@ -23,12 +28,12 @@ abstract class AdminForm extends Form
 	public function buildForm()
 	{
 		if ($this->getModel() && $this->getModel()->id) {
-			$url    = route('posts.update', $this->getModel());
-			$method = Method::PUT;
-			$this->label  = "Editer l'article";
+			$url         = route($this->routePrefixName . '.update', $this->getModel());
+			$method      = Method::PUT;
+			$this->label = "Editer l'article";
 		} else {
-			$url    = route('posts.store');
-			$method = Method::POST;
+			$url          = route($this->routePrefixName . '.store');
+			$method       = Method::POST;
 			$this->label  = "Créer l'article";
 		}
 		$this->formOptions = [

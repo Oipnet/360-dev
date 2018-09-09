@@ -93,6 +93,9 @@
                     <li id="products_product">
                         <a class="waves-effect" style="text-decoration: none;" href="{{ route('users.index') }}">Membres</a>
                     </li>
+                    <li id="products_product">
+                        <a class="waves-effect" style="text-decoration: none;" href="{{ route('roles.index') }}">Roles</a>
+                    </li>
                 </ul>
             </div>
         </li>

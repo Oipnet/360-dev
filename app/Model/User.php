@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Favorite\HasFavorites;
-use App\User\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'roles'];
+    protected $fillable = ['name', 'email', 'password', 'role_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -35,12 +34,28 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+	/**
+	 * @return BelongsTo
+	 */
+	public function role(): BelongsTo
+	{
+		return $this->belongsTo(Role::class);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRole(): string
+	{
+		return $this->role ? $this->role->name : '';
+	}
+
     /**
      * @return bool
      */
     public function isAdmin(): bool
     {
-        return $this->roles === Role::ADMIN;
+        return $this->role && ($this->role->slug === Role::ADMIN);
     }
 
     /**
@@ -49,11 +64,6 @@ class User extends Authenticatable
      */
     public function hasRole(string $role): bool
     {
-        return $this->roles === $role;
-    }
-
-    public function getRoleAttribute()
-    {
-        return ucfirst($this->roles);
+        return $this->role->slug === $role;
     }
 }

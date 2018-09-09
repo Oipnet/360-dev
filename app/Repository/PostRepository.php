@@ -23,15 +23,6 @@ class PostRepository extends Repository
 	}
 
 	/**
-	 * @param array $data
-	 * @return Model|Post
-	 */
-	public function save(array $data): Model
-	{
-		return $this->model->newQuery()->create($data);
-	}
-
-	/**
 	 * @return \Illuminate\Database\Eloquent\Collection|static[]
 	 */
 	public function getByOrderDesc(): Collection

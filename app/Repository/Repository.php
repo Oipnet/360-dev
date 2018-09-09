@@ -23,4 +23,13 @@ abstract class Repository
 		return $this->model->newQuery()->where('slug', $slug)->firstOrFail();
 	}
 
+	/**
+	 * @param array $data
+	 * @return Model
+	 */
+	public function save(array $data): Model
+	{
+		return $this->model->newQuery()->create($data);
+	}
+
 }

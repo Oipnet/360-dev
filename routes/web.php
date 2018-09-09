@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::resource('posts',      'PostsController');
     Route::resource('categories', 'CategoriesController');
     Route::resource('users',      'UserController');
+    Route::resource('roles',      'RoleController');
 });
 
 Auth::routes();
