@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Kris\LaravelFormBuilder\Form;
@@ -61,12 +62,12 @@ abstract class AdminController extends Controller
 	}
 
 	/**
-	 * @param string $model
+	 * @param string|object $model
 	 * @param string[] $data
 	 * @return Form
 	 * @throws \Exception
 	 */
-	protected function getForm(string $model = null, array $data = []): Form
+	protected function getForm($model = null, array $data = []): Form
 	{
 		$mainModel = $this->getMainModel();
 		$model     = $model ?: new $mainModel();
@@ -102,5 +103,13 @@ abstract class AdminController extends Controller
 		return $this->formClass;
 	}
 
+	/**
+	 * @param string $message
+	 * @return RedirectResponse
+	 */
+	protected function redirectToIndex(string $message): RedirectResponse
+	{
+		return redirect(route('roles.index'))->with('success', $message);
+	}
 
 }

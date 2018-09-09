@@ -18,7 +18,7 @@ class RolesForm extends AdminForm
         $this
             ->add('name', 'text')
             ->add('slug', 'text')
-			->add('description', 'textarea', ['attr' => ['id' => 'mdeditor']]);
+			->add('description', 'textarea');
 
 		$this->add('submit', 'submit', [
 			'label' => 'Ajouter le role',
