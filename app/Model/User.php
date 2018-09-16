@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'role_id'];
+    protected $fillable = ['name', 'email', 'password', 'role_id', 'discord_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -66,4 +66,12 @@ class User extends Authenticatable
     {
         return $this->role->slug === $role;
     }
+
+	/**
+	 * @return string
+	 */
+    public function getDiscordId(): ?string
+	{
+		return $this->getAttribute('discord_id') ?? null;
+	}
 }

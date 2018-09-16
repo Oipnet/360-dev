@@ -24,6 +24,7 @@
                                 {{ auth()->user()->name }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.account') }}">Mon compte</a>
                                 <a class="dropdown-item" href="{{ route('user.favorites') }}">Mes favoris</a>
                             </div>
                         </li>
