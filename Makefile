@@ -9,7 +9,7 @@ vendor: composer.lock
 install: vendor
 
 serve: install
-	php artisan serve
+	php artisan serve	
 
 test:
 	./vendor/bin/phpunit --colors

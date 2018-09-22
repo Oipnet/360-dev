@@ -50,6 +50,11 @@ class User extends Authenticatable
 		return $this->role ? $this->role->name : '';
 	}
 
+	public function setDiscordIdAttribute($value)
+    {
+        $this->attributes['discord_id'] = intval($value);
+    }
+
     /**
      * @return bool
      */

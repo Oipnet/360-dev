@@ -70,7 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    	$roleMember = $this->roleRepository->getBySlug('membre');
+        $roleMember = $this->roleRepository->getBySlug('membre');
     	if ($roleMember) {
     		$data['role_id'] = $roleMember->id;
 		} else {

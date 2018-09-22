@@ -180,7 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         \Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         \App\Providers\ObserverServiceProvider::class,
-				\Intervention\Image\ImageServiceProvider::class,
+        \Intervention\Image\ImageServiceProvider::class,
+        \App\Providers\DiscordProvider::class,
 
     ],
 
