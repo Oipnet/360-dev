@@ -50,8 +50,9 @@ class UsersController extends Controller
             }
         }
         if ($discord_id && $request->has('use_discord')) {
-            $discord_user = $discord->getUser($discord_id);
-            $data['name'] = $discord_user->username;
+            $discord_user   = $discord->getUser($discord_id);
+            $data['name']   = $discord_user->username;
+            $data['avatar'] = $discord_user->getAvatar();
         }
 		if (Auth::user()->update(array_merge($request->all(), $data))) {
 			return redirect()->route('user.account')->with('success', 'Votre compte a bien été mis à jour');

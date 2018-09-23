@@ -32,6 +32,9 @@
                     </label>
                 </div>
             </div>
+            <div class="col-md-4">
+                <img src="{{ $user->avatar }}" alt="Votre avatar">
+            </div>
         </div>
         <button class="btn btn-primary" type="submit">Modifer mon compte</button>
     </form>
