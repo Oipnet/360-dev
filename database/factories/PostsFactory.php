@@ -13,18 +13,18 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Model\Post::class, function (Faker $faker) {
+
+	$role     = \App\Model\User::inRandomOrder()->first();
+	$category = \App\Model\Category::inRandomOrder()->first();
 
     return [
-        'name'    => $faker->name,
-        'slug'    => $faker->slug,
-        'content' => $faker->text(1000),
-        'image'   => $faker->imageUrl(),
-        'category_id' => function () {
-            return factory(\App\Category::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(\App\User::class)->create()->id;
-        }
+        'name'        => $faker->name,
+        'slug'        => $faker->slug,
+        'content'     => $faker->text(1000),
+        'image'       => null, //$faker->image(public_path('posts')),
+        'online'      => false,
+        'category_id' => rand(1, 10),
+        'user_id'     => rand(1, 10),
     ];
 });

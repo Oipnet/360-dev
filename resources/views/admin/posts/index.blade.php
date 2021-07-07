@@ -12,18 +12,20 @@
                     <th>ID</th>
                     <th>Titre</th>
                     <th>URL</th>
+                    <th>Auteur</th>
                     <th>En ligne ?</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                     <tr>
                         <td>{{ $post->id }}</td>
                         <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}">{{ $post->name }}</a></td>
                         <td>{{ $post->slug }}</td>
-                        <td>{{ $post->online }}</td>
+                        <td>{{ $post->user->name }}</td>
+                        <td>{{ $post->getOnlineToString() }}</td>
                         <td>
                             <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn waves-effect waves-light">
                                 <i class="material-icons">mode_edit</i> Editer
@@ -35,7 +37,9 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr><td>Aucun article de créé pour le moment</td></tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Post;
+use App\Model\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 

@@ -14,6 +14,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Post::class, 50)->create();
+        factory(\App\Model\Post::class, 10)->create();
     }
 }

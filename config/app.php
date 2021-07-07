@@ -125,6 +125,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+		'post_per_page' => 15,
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -178,6 +180,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         \Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         \App\Providers\ObserverServiceProvider::class,
+        \Intervention\Image\ImageServiceProvider::class,
+        \App\Providers\DiscordProvider::class,
 
     ],
 
@@ -230,7 +234,8 @@ return [
 
         // Project aliases
         'Menu'       => \App\Helpers\MenuHelper::class,
-        'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormHelper' => \Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+		'image'      => \Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -1,8 +1,8 @@
 <?php
 namespace App\Observers;
 
-use App\Category;
-use App\Post;
+use App\Model\Category;
+use App\Model\Post;
 
 class PostsCountObserver
 {

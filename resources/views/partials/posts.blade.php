@@ -1,21 +1,23 @@
 @foreach($posts as $post)
-    <div class="col-md-4 mb-3">
-        <div class="card card-default">
-            <img src="{{ $post->image }}" alt="" class="card-img-top" height="175">
-            <div class="card-body text-center">
-                <div class="card-title">{{ $post->name }}</div>
-                <p class="card-text">{{ $post->shortContent() }}</p>
-                <a href="{{ route('blog.show', ['slug' => $post->slug]) }}" class="btn btn-outline-primary m-b">
-                    Lire la suite <i class="glyphicon glyphicon-menu-right"></i>
-                </a>
-            </div>
-            <div class="card-footer">
-                <small>
-                    Le <em>{{ $post->getCreatedAt() }}</em>
-                    | Par : <strong>{{ $post->user->name }}</strong>
-                    | {{ $post->category->name }}
-                </small>
-            </div>
+
+    <!-- Blog Post -->
+    <div class="card mb-4">
+        <a href="{{ route('blog.show', ['slug' => $post->slug]) }}">
+            <img class="card-img-top" src="{{ $post->getImage('thumb') ?: 'http://placehold.it/750x300' }}" alt="Card image cap">
+        </a>
+        <div class="card-body">
+            <h2 class="card-title">{{ $post->name }}</h2>
+            <p class="card-text">{{ $post->shortContent() }}</p>
+            <a href="{{ route('blog.show', ['slug' => $post->slug]) }}" class="btn btn-primary">Lire la suite &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            Créé le <em>{{ $post->getCreatedAt() }}</em> by
+            <a href="#"><strong>{{ $post->user->name }}</strong></a>
+            | {{ $post->category->name }}
+            @if (Auth::check())
+                | <favorite :post={{ $post->id }} :favorited={{ $post->favorited() ? 'true' : 'false' }}></favorite>
+            @endif
         </div>
     </div>
+
 @endforeach
